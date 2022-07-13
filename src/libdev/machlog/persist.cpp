@@ -121,9 +121,15 @@ void MachLogPersistence::setDataForWrite() const
 //removed for now			nonConstPer.racePopulated_[ (int)i ] = false;
 //removed for now	}
 	//remove any left over from the time before.
-	nonConstPer.controllers_.erase( nonConstPer.controllers_.begin(), nonConstPer.controllers_.end() );
+	nonConstPer.controllers_.clear();
 	for( MachPhys::Race i = MachPhys::RED; i < MachPhys::N_RACES; ++i )
 	{
+		std::cerr << "race " << i << "objects: " << std::endl;
+		const auto ro = MachLogRaces::instance().raceObjects( i );
+		for (auto obj : ro)
+		{
+			std::cerr << "    " << obj->objectType() << " st: " << obj->subType() << std::endl;
+		}
 		if( MachLogRaces::instance().raceObjects( i ).size() > 0 )
 		{
 			MachLogController *pController = &MachLogRaces::instance().controller( i );
@@ -221,6 +227,10 @@ void perRead( PerIstream& istr, MachLogPersistence& per )
 			MachLogRace* pRace = _NEW( MachLogRace( race ) );
 			MachLogRaces::instance().race( race, pRace, MachLogRaces::DO_NOT_CREATE_SQUADRONS );
 		}
+		else
+		{
+			HAL_STREAM("Race " << race << " does not exist in this saved game" << std::endl );
+		}
 	}
 
 	//recreate the artefacts race.
@@ -244,7 +254,7 @@ void perRead( PerIstream& istr, MachLogPersistence& per )
 		per.controllers_[i]->setObjectPtr( pPhysObject, localTransform );
 		HAL_STREAM("derefercing element " << i << " to get race\n" );
 		MachPhys::Race race = per.controllers_[i]->race();
-		HAL_STREAM("creating new log race\n" );
+		HAL_STREAM("creating new log race for race " << race << std::endl );
 		HAL_STREAM("registerting controller with races.\n" );
 		MachLogRaces::instance().setController( race, per.controllers_[i] );
 		if( per.controllers_[i]->type() == MachLogController::PLAYER_CONTROLLER )

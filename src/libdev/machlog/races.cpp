@@ -851,6 +851,7 @@ MachLogRaces::controller( MachPhys::Race r )
 void
 MachLogRaces::setController( MachPhys::Race r, MachLogController * pCtl )
 {
+	std::cerr << "setController " << pCtl << " for race " << r << std::endl;
 	pDataImpl_->controller_[ map_MachPhysRace_to_size_t( r ) ] = pCtl;
 }
 
