@@ -88,7 +88,7 @@ public:
     MachPromptText* 				pPromptText_; 			//The displayable displaying the prompt text
 	MachGuiCorralSingleIcon*		pCorralSingleIcon_;
 	MachGuiCorral*					pCorral_;
-	MachGuiMachineNavigator*		pMachineNavigation_;
+    MachGuiMachineNavigator*		pMachineNavigation_ = nullptr;
 	MachGuiConstructionNavigator*	pConstructionNavigation_;
 	MachCommandIcons*				pCommandIcons_;
 	MachSmallCommandIcons*			pSmallCommandIcons_;

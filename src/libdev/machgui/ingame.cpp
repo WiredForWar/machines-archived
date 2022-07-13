@@ -2914,7 +2914,8 @@ void MachInGameScreen::setupNavigators()
 		pConstructionNavigation_ = _NEW( MachGuiConstructionNavigator( pControlPanel_, navTopLeft, this ) );
 
 		//Construct squadron bank
-	    pSquadronBank_ = _NEW( MachGuiSquadronBank( pControlPanel_, navTopLeft, pSquadronIcon_, this ) );
+		pSquadronBank_ = new MachGuiSquadronBank( pControlPanel_, navTopLeft, pSquadronIcon_, this );
+		std::cerr << "pSquadronBank_ constructed in " << (void*)pSquadronBank_ << std::endl;
 	}
 	else
 	{

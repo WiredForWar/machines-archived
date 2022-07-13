@@ -22,7 +22,7 @@ public:
 	BaseAppendBuffer( const char* fileName );
 	// PRE( fileName != NULL );
 
-	BaseAppendBuffer();
+    BaseAppendBuffer() = default;
 
 	~BaseAppendBuffer();
 
@@ -47,7 +47,7 @@ private:
 	// Operation deliberately revoked
 	bool operator ==( const BaseAppendBuffer& );
 
-	char* pFileName_;
+    std::string pFileName_;
 
 };
 

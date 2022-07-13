@@ -30,8 +30,9 @@ GuiBitmap MachGui::createIconForMachine(MachLogMachine* machine, bool firstPerso
         wc = machine->asCanAttack().weaponCombo();
     }
 
-    auto icon = GuiBitmap{ Gui::bitmap( MachActorBitmaps::name( machine->objectType(), machine->subType(), machine->asMachine().hwLevel(), wc, machine->race(), firstPersonIcon ) ) };
-    return icon;
+	string bitmapName = MachActorBitmaps::name( machine->objectType(), machine->subType(), machine->hwLevel(), wc, machine->race(), firstPersonIcon );
+	GuiBitmap icon = Gui::bitmap( bitmapName );
+	return icon;
 }
 
 
