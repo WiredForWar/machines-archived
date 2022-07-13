@@ -170,6 +170,13 @@ void perWrite( PerOstream& ostr, const MachLogPersistence& per )
 
 	HAL_STREAM("gonna persist out vector of controllers\n" );
 	ostr << per.controllers_;
+
+	HAL_STREAM("number of controllers: " << per.controllers_.size() << std::endl );
+	for( size_t i = 0; i < per.controllers_.size(); ++i )
+	{
+		HAL_STREAM( "Controller at address " << (void*)per.controllers_[i] << std::endl );
+	}
+
 	HAL_STREAM("MachLogPersistence::perWrite writing others collection " << std::endl);
 	ostr << per.others();
 	HAL_STREAM("MachLogPersistence::perWrite writing constructions collection " << std::endl);
