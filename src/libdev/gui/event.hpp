@@ -98,6 +98,8 @@ public:
     using GuiEventBase::isCtrlPressed;
     using GuiEventBase::isShiftPressed;
 
+    bool isDoubleClick() const { return doubleClick_; }
+    void setDoubleClick(bool isDouble) { doubleClick_ = isDouble; }
     ///////////////////////////////
 
 private:
@@ -106,6 +108,7 @@ private:
     Gui::ButtonState    leftButton_;
     Gui::ButtonState    rightButton_;
     Gui::ScrollState    scroll_;
+    bool doubleClick_ = false;
 
     friend bool operator <( const GuiMouseEvent& a, const GuiMouseEvent& b );
     friend bool operator ==( const GuiMouseEvent& a, const GuiMouseEvent& b );
