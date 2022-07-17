@@ -105,14 +105,14 @@ void MachGuiInGameChatMessagesDisplay::doDisplay()
 		textBmp_.filledRectangle( RenSurface::Rect( 0, 0, textBmp_.width(), textBmp_.height() ), Gui::MAGENTA() );
 
 		// Render up to five lines of chat messages
-		int fontHeight = shadowFont_.charHeight() + 1;
+		int fontHeight = shadowFont_.charHeight() + 2;
 		int index = 0;
 
 		for ( ctl_list<string>::const_iterator iter = MachGuiInGameChatMessages::instance().messages().begin();
 			  iter != MachGuiInGameChatMessages::instance().messages().end();
 			  ++iter )
 		{
-			shadowFont_.drawText( &textBmp_, *iter, Gui::Coord( 1, 1 + ( fontHeight * index ) ), width() );
+			// shadowFont_.drawText( &textBmp_, *iter, Gui::Coord( 2, 2 + ( fontHeight * index ) ), width() );
 			font_.drawText( &textBmp_, *iter, Gui::Coord( 0, fontHeight * index ), width() );
 			++index;
 		}

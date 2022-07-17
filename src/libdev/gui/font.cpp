@@ -31,6 +31,7 @@ GuiBmpFontCore::GuiBmpFontCore( const SysPathName& fontPath )
 	{
 		calculateProportionalFontWidthData( persistFontPath );
 	}
+	calculateProportionalFontWidthData( persistFontPath );
 }
 
 void GuiBmpFontCore::createFromBinaryFile( const SysPathName& persistFontPath )
@@ -141,6 +142,11 @@ char GuiBmpFont::yellowCharIndex()
 	return 0xAC;
 }
 
+size_t GuiBmpFont::getCharOffset(char c)
+{
+	return pFontCore_->charData_[ (unsigned char)c ].offset_;
+}
+
 //static
 GuiBmpFont GuiBmpFont::getFont( const SysPathName& fontPath, FontType fontType /*= PROPORTIONAL*/, size_t spaceCharWidth /*= 7*/, size_t spacing /*= 1*/ )
 {
@@ -165,6 +171,11 @@ GuiBmpFont GuiBmpFont::getFont( const SysPathName& fontPath, FontType fontType /
 	newFont.spaceCharWidth( spaceCharWidth );
 	newFont.spacing( spacing );
 	fonts.push_back( newFont );
+
+	std::cerr << "font" << fontPath << std::endl;
+	std::cerr << "char 'a' width: " << newFont.charWidth('a') << " offest: " << newFont.getCharOffset('a') << std::endl;
+	std::cerr << "char 'b' width: " << newFont.charWidth('b') << " offest: " << newFont.getCharOffset('b') << std::endl;
+	std::cerr << "char 'c' width: " << newFont.charWidth('c') << " offest: " << newFont.getCharOffset('c') << std::endl;
 	return newFont;
 }
 

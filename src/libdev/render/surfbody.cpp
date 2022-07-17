@@ -312,6 +312,48 @@ RenISurfBody::~RenISurfBody()
     }
 }
 
+//void getScaledSurface(const SDL_Surface * pSourceSurface, const SDL_Rect& targetDimensions)
+//{
+//	SDL_Surface *p32BPPSurface = SDL_CreateRGBSurface(
+//		pSourceSurface->flags,
+//		pSourceSurface->w,
+//		pSourceSurface->h,
+//		32,
+//		pSourceSurface->format->Rmask,
+//		pSourceSurface->format->Gmask,
+//		pSourceSurface->format->Bmask,
+//		pSourceSurface->format->Amask);
+
+//	SDL_Surface *pScaleSurface = SDL_CreateRGBSurface(
+//		p32BPPSurface->flags,
+//		targetDimensions.w,
+//		targetDimensions.h,
+//		p32BPPSurface->format->BitsPerPixel,
+//		p32BPPSurface->format->Rmask,
+//		p32BPPSurface->format->Gmask,
+//		p32BPPSurface->format->Bmask,
+//		p32BPPSurface->format->Amask);
+
+//	// 32 bit per pixel surfaces (loaded from the original file) won't scale down with BlitScaled, suggestion to first fill the surface
+//	// 8 and 24 bit depth pngs did not require this
+//	// https://stackoverflow.com/questions/20587999/sdl-blitscaled-doesnt-work
+//	SDL_FillRect(pScaleSurface, &targetDimensions, SDL_MapRGBA(pScaleSurface->format, 255, 0, 0, 255));
+
+//	if (SDL_BlitScaled(p32BPPSurface, NULL, pScaleSurface, NULL) < 0) {
+//		printf("Error did not scale surface: %s\n", SDL_GetError());
+
+//		SDL_FreeSurface(pScaleSurface);
+//		pScaleSurface = NULL;
+//	}
+//	else {
+//		SDL_FreeSurface(pSurface);
+
+//		pSurface = pScaleSurface;
+//		width = pSurface->w;
+//		height = pSurface->h;
+//	}
+//}
+
 // virtual
 bool RenISurfBody::read(const std::string& bitmapName)
 {
@@ -319,20 +361,18 @@ bool RenISurfBody::read(const std::string& bitmapName)
 //	PRE(pixelFormat_.isValid());	// Use the ctor which initialises the format.
 
 	bool retval = false;
-    SDL_Surface* surface = IMG_Load(bitmapName.c_str());
+	SDL_Surface* surface = IMG_Load(bitmapName.c_str());
 	if (!surface)
 	{
 		RENDER_STREAM("Failed to load surface from file " << SDL_GetError() << std::endl);
 		return false;
 	}
-    else
-    {
-        if (allocateDDSurfaces(surface->w, surface->h, pixelFormat_, SYSTEM))
-            retval = copyWithColourKeyEmulation(surface, RenColour::magenta());
 
-        name(bitmapName);
-        SDL_FreeSurface(surface);
-    }
+	if (allocateDDSurfaces(surface->w, surface->h, pixelFormat_, SYSTEM))
+		retval = copyWithColourKeyEmulation(surface, RenColour::magenta());
+
+	name(bitmapName);
+	SDL_FreeSurface(surface);
 
 	return retval;
 }

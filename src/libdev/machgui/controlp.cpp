@@ -30,11 +30,21 @@ class MachGuiControlPanelOnOffBtn : public GuiButton
 {
 public:
 	MachGuiControlPanelOnOffBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:	GuiButton(pParent, Gui::Box( rel, 6, 49 ) ),
+	:	GuiButton(pParent, Gui::Box( rel, reqWidth(), reqHeight() ) ),
 		pInGameScreen_( pInGameScreen ),
 		slideHoleBmp_( Gui::bitmap( "gui/misc/slidhole.bmp" ) ),
 		sliderBmp_( Gui::bitmap( "gui/misc/slider.bmp" ) )
 	{}
+
+	static int reqWidth()
+	{
+		return 6 * MachGui::uiSizeMultiplier();
+	}
+
+	static int reqHeight()
+	{
+		return 49 * MachGui::uiSizeMultiplier();
+	}
 
 protected:
 	virtual void doBeReleased( const GuiMouseEvent& )
@@ -116,7 +126,7 @@ MachGuiControlPanel::MachGuiControlPanel( GuiDisplayable* pParent, const Gui::Bo
 	setupDecalBitmaps();
 	setupDecalCoords();
 
-	_NEW( MachGuiControlPanelOnOffBtn( this, Gui::Coord( MachGui::controlPanelOutXPos() - 6, 8 ), pInGameScreen ) );
+	_NEW( MachGuiControlPanelOnOffBtn( this, Gui::Coord( MachGui::controlPanelOutXPos() - MachGuiControlPanelOnOffBtn::reqWidth(), 8 * MachGui::uiSizeMultiplier()), pInGameScreen ) );
 
 	useFastSecondDisplay( false );
 
@@ -289,14 +299,15 @@ void MachGuiControlPanel::setupDecalCoords()
 	CB_DEPIMPL_ARRAY( Gui::Coord, decalCoord_ );
 	CB_DEPIMPL_ARRAY( GuiBitmap, decals_ );
 
-	decalCoord_[0] = Gui::Coord( 0,  78 );
-	decalCoord_[1] = Gui::Coord( 1,  175 );
-	decalCoord_[2] = Gui::Coord( 127,60 );
-	decalCoord_[3] = Gui::Coord( 79, 155 );
-	decalCoord_[4] = Gui::Coord( 0,  0 );
-	decalCoord_[5] = Gui::Coord( 60, getVisibleHeight() - ( decals_[5].height() + 5 ) );
-	decalCoord_[6] = Gui::Coord( 5,  getVisibleHeight() - ( decals_[6].height() + 3 ) );
-	decalCoord_[7] = Gui::Coord( 136,getVisibleHeight() - ( decals_[7].height() + 3 ) );
+	decalCoord_[0] = Gui::Coord( 0,  78 ) * MachGui::uiSizeMultiplier();
+	decalCoord_[1] = Gui::Coord( 1,  175 ) * MachGui::uiSizeMultiplier();
+	decalCoord_[2] = Gui::Coord( 127,60 ) * MachGui::uiSizeMultiplier();
+	decalCoord_[3] = Gui::Coord( 79, 155 ) * MachGui::uiSizeMultiplier();
+	decalCoord_[4] = Gui::Coord( 0,  0 ) * MachGui::uiSizeMultiplier();
+
+	decalCoord_[5] = Gui::Coord( 60 * MachGui::uiSizeMultiplier(), getVisibleHeight() - ( decals_[5].height() + 5 * MachGui::uiSizeMultiplier()) );
+	decalCoord_[6] = Gui::Coord( 5 * MachGui::uiSizeMultiplier(),  getVisibleHeight() - ( decals_[6].height() + 3 * MachGui::uiSizeMultiplier()) );
+	decalCoord_[7] = Gui::Coord( 136 * MachGui::uiSizeMultiplier(),getVisibleHeight() - ( decals_[7].height() + 3 * MachGui::uiSizeMultiplier()) );
 }
 
 void MachGuiControlPanel::repositionNavigators( GuiDisplayable* pMachineNav, GuiDisplayable* pConstructionNav, GuiDisplayable* pSquadNav )
@@ -343,9 +354,11 @@ void MachGuiControlPanel::setupDecalBitmaps()
 	decals_[1] = Gui::bitmap( getDecalRootDirectory() + "decal2.bmp" );
 	decals_[2] = Gui::bitmap( getDecalRootDirectory() + "decal3.bmp" );
 	decals_[3] = Gui::bitmap( getDecalRootDirectory() + "decal4.bmp" );
-	decals_[4] = Gui::bitmap( "gui/misc/decal5.bmp" );
+	//decals_[4] = Gui::bitmap( "gui/misc/decal5.bmp" );
+	decals_[4] = Gui::bitmap( "gui/misc/decal5_2x.png" );
 	decals_[5] = Gui::bitmap( "gui/misc/decal6.bmp" );
 	decals_[6] = Gui::bitmap( "gui/misc/decal7.bmp" );
+//	decals_[6] = Gui::bitmap( "gui/misc/decal7_x2.png" );
 	decals_[7] = Gui::bitmap( "gui/misc/decal7.bmp" );
 
 	for ( int loop = 0; loop < 8; ++loop )

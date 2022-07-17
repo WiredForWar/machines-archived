@@ -381,7 +381,7 @@ bool MexAlignedBox2d::intersects( const MexLine2d& line ) const
 
 ostream& operator<<(ostream& os, const MexAlignedBox2d& box)
 {
-	os << "2D box: " << box.minCorner() << " to " << box.maxCorner();
+	os << "2D box: " << box.minCorner() << " to " << box.maxCorner() << " size " << box.width() << "x" << box.height();
 	return os;
 }
 

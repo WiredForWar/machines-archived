@@ -27,7 +27,7 @@ public:
 	enum Justification { LEFT_JUSTIFY, RIGHT_JUSTIFY };
 	enum FontType { PROPORTIONAL, FIXED_SPACE };
 
-	static GuiBmpFont getFont( const SysPathName& fontPath, FontType = PROPORTIONAL, size_t spaceCharWidth = 7, size_t spacing = 1 );
+    static GuiBmpFont getFont( const SysPathName& fontPath, FontType = PROPORTIONAL, size_t spaceCharWidth = 14, size_t spacing = 1 );
 
 	GuiBmpFont(); // Default constructor to satisfy ctl_vector. DO NOT USE!!!
     GuiBmpFont( const GuiBmpFont& );
@@ -75,6 +75,8 @@ public:
 	static char greenCharIndex();
 	static char blueCharIndex();
 	static char yellowCharIndex();
+
+    size_t getCharOffset(char c);
 
 protected:
     GuiBmpFont( const SysPathName& fontPath );

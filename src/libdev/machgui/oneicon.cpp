@@ -493,7 +493,9 @@ MachGuiCorralSingleIcon::MachGuiCorralSingleIcon( GuiDisplayable* pParent, const
 	isObservingActor_( false )
 {
 	pIconInfo_ = _NEW( MachGuiCorralSingleIconInfo( this, Gui::Coord( MachGuiCorralResource::buttonWidth(), 0 ), pInGameScreen_ ) );
-	pSelectInsideBuildingIcon_ = _NEW( MachGuiSelectInsideBuildingIcon( this, Gui::Coord( MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0 ), SysPathNames( SysPathName("gui/misc/contents.bmp"),SysPathName("gui/misc/contents.bmp") ), pInGameScreen_ ) );
+	const char insideBuildingIconFile[] = "gui/misc/contents.bmp";
+	//const char insideBuildingIconFile[] = "gui/misc/contents_2x.png";
+	pSelectInsideBuildingIcon_ = _NEW( MachGuiSelectInsideBuildingIcon( this, Gui::Coord( MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0 ), SysPathNames( SysPathName(insideBuildingIconFile),SysPathName(insideBuildingIconFile) ), pInGameScreen_ ) );
 	pInHeadIcon_ = _NEW( MachGuiInHeadIcon( this, Gui::Coord( MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0 ), SysPathNames( SysPathName("gui/misc/red/inhead.bmp"),SysPathName("gui/misc/red/inhead.bmp") ), pInGameScreen_ ) );
 }
 

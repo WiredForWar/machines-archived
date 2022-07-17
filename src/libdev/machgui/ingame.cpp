@@ -188,11 +188,13 @@ MachInGameScreen::MachInGameScreen( W4dSceneManager* pSceneManager, W4dRoot* pRo
 	pReporter->report( 35, 100 ); // 35% done
 
     //Construct continent map
-	pContinentMap_ = _NEW( MachContinentMap( pMapArea_, Gui::Coord( 2, 1 ), pCameras_, this ) );
+	pContinentMap_ = _NEW( MachContinentMap( pMapArea_, Gui::Coord( 2, 1 ) * MachGui::uiSizeMultiplier(), pCameras_, this ) );
 	pReporter->report( 40, 100 ); // 40% done
 
 	//Construct buttons down side of continent map
     Gui::XCoord x = pContinentMap_->absoluteBoundary().maxCorner().x();
+
+	std::cerr << "pContinentMap_->maxCorner().x()" << x << std::endl;
 
 	pBmuButton_ = _NEW( MachGuiBmuButton( pMapArea_, Gui::Coord( x, 0 ), SysPathName( "gui/navigate/bmus.bmp" ), pContinentMap_->bmuText(), pContinentMap_, this ) );
 	pMachinesIcon_ = _NEW( MachMachinesIcon( pMapArea_, Gui::Coord( x, pBmuButton_->absoluteBoundary().maxCorner().y() - 1 ), this ) );
@@ -205,10 +207,10 @@ MachInGameScreen::MachInGameScreen( W4dSceneManager* pSceneManager, W4dRoot* pRo
  	pReporter->report( 50, 100 ); // 50% done
 
 	//Construct single icon corral
-	pCorralSingleIcon_ = _NEW( MachGuiCorralSingleIcon( pControlPanel_, Gui::Coord( 1,0 ), this ) );
+	pCorralSingleIcon_ = _NEW( MachGuiCorralSingleIcon( pControlPanel_, Gui::Coord( 1 * MachGui::uiSizeMultiplier(), 0 ), this ) );
 
 	//Construct small command icons
-	Gui::Coord smallCommandCoord( 2, pCorralSingleIcon_->height() + 2 );
+	Gui::Coord smallCommandCoord( 2 * MachGui::uiSizeMultiplier(), pCorralSingleIcon_->height() + 2 );
 	pSmallCommandIcons_= _NEW( MachSmallCommandIcons( pControlPanel_, smallCommandCoord, this ) );
 	pReporter->report( 55, 100 ); // 55% done
 

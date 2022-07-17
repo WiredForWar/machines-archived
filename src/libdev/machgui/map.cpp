@@ -75,12 +75,12 @@ public:
 
 	static size_t reqWidth()
 	{
-		return 14;
+		return 14 * MachGui::uiSizeMultiplier();
 	}
 
 	static size_t reqHeight()
 	{
-		return 11;
+		return 11 * MachGui::uiSizeMultiplier();
 	}
 
 protected:
@@ -138,12 +138,12 @@ public:
 
 	static size_t reqWidth()
 	{
-		return 14;
+		return 14 * MachGui::uiSizeMultiplier();
 	}
 
 	static size_t reqHeight()
 	{
-		return 11;
+		return 11 * MachGui::uiSizeMultiplier();
 	}
 
 protected:
@@ -223,9 +223,13 @@ protected:
 	MachInGameScreen* pInGameScreen_;
 };
 
+//static GuiBitmap getBitmap( const SysPathName& name )
+//{
+
+//}
 
 MachContinentMap::MachContinentMap( GuiDisplayable* pParent, const Gui::Coord& rel, MachCameras* pCameras, MachInGameScreen* pInGameScreen )
-: GuiDisplayable( pParent, Gui::translateBitmapDimensions( SysPathName("gui/map/rlogo.bmp"), rel ), GuiDisplayable::LAYER2 ),
+: GuiDisplayable( pParent, Gui::translateBitmapDimensions( SysPathName("gui/map/rlogo_2x.png"), rel ), GuiDisplayable::LAYER2 ),
   pCameras_( pCameras ),
   firstDraw_( false ),
   pInGameScreen_( pInGameScreen ),
@@ -236,6 +240,8 @@ MachContinentMap::MachContinentMap( GuiDisplayable* pParent, const Gui::Coord& r
   currentBeacon_( MachLog::NO_BEACON )
 {
     actorPositions_.reserve( 512 );
+
+	std::cerr << "width, height: " << width() << " " << height() << std::endl;
 
 	RenColour black( 0,0,0 );
 	cameraPosImage_ = Gui::bitmap( "gui/map/campos.bmp" );
@@ -279,7 +285,7 @@ void MachContinentMap::loadGame( const string& planet )
 {
 	string mapPath = "models/planet/";
 	mapPath += planet;
-	string mapBmp = mapPath + "/map.bmp";
+	string mapBmp = mapPath + "/map.png";
 
 	ASSERT_FILE_EXISTS( mapBmp.c_str() );
 
@@ -289,6 +295,8 @@ void MachContinentMap::loadGame( const string& planet )
 	DEBUG_STREAM( DIAG_NEIL, "Changing map to " << mapBmp << std::endl );
 
 	mapBackground_ = Gui::bitmap( mapBmp );
+	std::cerr << "mapBackground_ width, height: " << mapBackground_.width() << " " << mapBackground_.height() << std::endl;
+
 	mapFrameOne_ = RenSurface::createAnonymousSurface( mapBackground_.width(), mapBackground_.height(), mapBackground_ );
 	mapFrameTwo_ = RenSurface::createAnonymousSurface( mapFrameOne_.width(), mapFrameOne_.height(), mapFrameOne_ );
 
@@ -369,7 +377,7 @@ void MachContinentMap::doDisplay()
 // static
 GuiBitmap* MachContinentMap::logoImage()
 {
-	static GuiBitmap machinePixel[MachPhys::N_RACES] = { Gui::bitmap( "gui/map/rlogo.bmp" ),
+	static GuiBitmap machinePixel[MachPhys::N_RACES] = { Gui::bitmap( "gui/map/rlogo_2x.png" ),
 														 Gui::bitmap( "gui/map/blogo.bmp" ),
 														 Gui::bitmap( "gui/map/glogo.bmp" ),
 														 Gui::bitmap( "gui/map/ylogo.bmp" ) };

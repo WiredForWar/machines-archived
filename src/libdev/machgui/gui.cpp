@@ -449,9 +449,11 @@ GuiBitmap& MachGui::controlPanelBmp()
 
 	if ( pBmp == NULL )
 	{
-		ASSERT_FILE_EXISTS( "gui/misc/backtile.bmp" );
+		//const char fileName[] = "gui/misc/backtile.bmp";
+		const char fileName[] = "gui/misc/backtile_2x.png";
+		ASSERT_FILE_EXISTS( fileName );
 
-	   pBmp = _NEW( GuiBitmap( Gui::bitmap("gui/misc/backtile.bmp") ) );
+	   pBmp = _NEW( GuiBitmap( Gui::bitmap(fileName) ) );
 	}
 
 	return *pBmp;
@@ -682,25 +684,25 @@ std::string MachGui::getScaledImagePath(const char* pBasePath)
 //static
 int MachGui::controlPanelInXPos()
 {
-	return 6;
+	return 6 * s_uiScaleMultiplier;
 }
 
 //static
 int MachGui::controlPanelOutXPos()
 {
-	return 169;
+	return 169 * s_uiScaleMultiplier;
 }
 
 //static
 int MachGui::controlPanelSlideInSpeed()
 {
-	return 15;
+	return 15 * s_uiScaleMultiplier;
 }
 
 //static
 int MachGui::controlPanelSlideOutSpeed()
 {
-	return 20;
+	return 20 * s_uiScaleMultiplier;
 }
 
 //static
@@ -718,7 +720,7 @@ int MachGui::promptTextYOffset()
 //static
 int MachGui::mapAreaHeight()
 {
-	return 129;
+	return 129 * s_uiScaleMultiplier;
 }
 
 //static

@@ -114,10 +114,10 @@ class MachGuiReturnToMenuBtn : public GuiButton
 {
 public:
 	MachGuiReturnToMenuBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:	GuiButton(pParent, Gui::Box( rel, 20, 20 ) ),
+	:	GuiButton(pParent, Gui::Box( rel, 20 * MachGui::uiSizeMultiplier(), 20 * MachGui::uiSizeMultiplier() ) ),
 		pInGameScreen_( pInGameScreen ),
-		return1Bmp_( Gui::bitmap( "gui/misc/return1.bmp" ) ),
-		return2Bmp_( Gui::bitmap( "gui/misc/return2.bmp" ) )
+		return1Bmp_( Gui::bitmap( "gui/misc/return1_2x.png" ) ),
+		return2Bmp_( Gui::bitmap( "gui/misc/return2_2x.png" ) )
 	{}
 
 protected:
@@ -235,7 +235,7 @@ public:
 };
 
 MachGuiControlPanelAddOnImpl::MachGuiControlPanelAddOnImpl()
-:	backgroundBmp_( Gui::bitmap( "gui/misc/camtab.bmp" ) )
+:	backgroundBmp_( Gui::bitmap( "gui/misc/camtab_2x.png" ) )
 {
 	backgroundBmp_.enableColourKeying();
 }
@@ -244,7 +244,7 @@ MachGuiControlPanelAddOnImpl::MachGuiControlPanelAddOnImpl()
 #define MachGuiControlPanelAddOnHeight 66
 
 MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent, const Gui::Coord& coord, MachInGameScreen* pInGameScreen )
-:	GuiDisplayable( pParent, Gui::Box( coord, MachGuiControlPanelAddOnWidth, MachGuiControlPanelAddOnHeight ), GuiDisplayable::LAYER3 )
+:	GuiDisplayable( pParent, Gui::Box( coord, MachGuiControlPanelAddOnWidth * MachGui::uiSizeMultiplier(), MachGuiControlPanelAddOnHeight * MachGui::uiSizeMultiplier() ), GuiDisplayable::LAYER3 )
 {
 	pImpl_ = _NEW( MachGuiControlPanelAddOnImpl() );
 
@@ -252,8 +252,8 @@ MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent, con
 
 	pInGameScreen_ = pInGameScreen;
 
-	_NEW( MachGuiReturnToMenuBtn( this, Gui::Coord(4,0), pInGameScreen ) );
-	_NEW( MachGuiCameraToggleBtn( this, Gui::Coord(4,22), pInGameScreen ) );
+	_NEW( MachGuiReturnToMenuBtn( this, Gui::Coord(4, 0) * MachGui::uiSizeMultiplier(), pInGameScreen ) );
+	_NEW( MachGuiCameraToggleBtn( this, Gui::Coord(4, 22) * MachGui::uiSizeMultiplier(), pInGameScreen ) );
 
 	redrawEveryFrame( true );
 

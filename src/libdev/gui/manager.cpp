@@ -456,6 +456,11 @@ const GuiColourScheme& GuiManager::colourScheme() const
 	return colourScheme_;
 }
 
+char redCharIndex()
+{
+	return 0xA9;
+}
+
 //////////////////////////////////////////////////////////////////////
 
 GuiColourScheme::GuiColourScheme()
@@ -472,7 +477,6 @@ GuiColourScheme::GuiColourScheme()
   buttonHi_( Gui::WHITE() ),
   buttonDefault_( Gui::BLACK() )
 {
-	// Intentionally Empty
 }
 
 //////////////////////////////////////////////////////////////////////

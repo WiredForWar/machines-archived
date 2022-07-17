@@ -33,7 +33,7 @@ public:
 		}
 
 		// Render the underside of the map area.
-		static GuiBitmap slideRailBmp = Gui::bitmap( "gui/misc/slide.bmp" );
+		static GuiBitmap slideRailBmp = Gui::bitmap( "gui/misc/slide_2x.png" );
 
 		if ( not slideRailBmp.isColourKeyingOn() )
 		{
