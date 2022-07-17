@@ -273,7 +273,7 @@ MachContinentMap::MachContinentMap( GuiDisplayable* pParent, const Gui::Coord& r
 	selectedAttackedMachineImage().enableColourKeying();
 	selectedAttackedPodImage().enableColourKeying();
 
-	pBmuText_ = _NEW( MachGuiBmuText( this, Gui::Coord( 1, 1 ) ) );
+	pBmuText_ = _NEW( MachGuiBmuText( this, Gui::Coord( 1, 1 ) * MachGui::uiSizeMultiplier() ) );
 
 	pTerrainOnOffButton_ = _NEW( MachGuiTerrainOnOffButton(this, Gui::Coord( width() - MachGuiTerrainOnOffButton::reqWidth(), height() - MachGuiTerrainOnOffButton::reqHeight() ), this, pInGameScreen_ ) );
 	pMapModeButton_ = _NEW( MachGuiMapModeButton(this, Gui::Coord( width() - MachGuiTerrainOnOffButton::reqWidth() - MachGuiMapModeButton::reqWidth() + 1 /* 1 pixel overlap */, height() - MachGuiMapModeButton::reqHeight() ), this, pInGameScreen_ ) );
