@@ -57,9 +57,13 @@ MexAlignedBox2d::MexAlignedBox2d
     {
         vmin_.y( y2 );
         vmax_.y( y1 );
-    }
+	}
 }
 
+MexAlignedBox2d::MexAlignedBox2d(const MexPoint2d &position, const MexSize2d &size)
+	: MexAlignedBox2d(position, size.width(), size.height())
+{
+}
 
 MexAlignedBox2d::MexAlignedBox2d
 (
@@ -219,6 +223,10 @@ MATHEX_SCALAR MexAlignedBox2d::height() const
 	return vmax_.y() - vmin_.y();
 }
 
+MexSize2d MexAlignedBox2d::size() const
+{
+	return MexSize2d(width(), height());
+}
 
 /*-----------------------------------------------------------------------------**
 ** Here is an implementation of a Cohen-Sutherland clip clipper in C++.        **

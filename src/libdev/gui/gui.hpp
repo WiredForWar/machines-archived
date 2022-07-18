@@ -66,6 +66,7 @@ struct Gui
 	typedef MexVec2			Vec;
 	typedef MexAlignedBox2d	Boundary;
 	typedef MexAlignedBox2d	Box;
+	typedef MexSize2d       Size;
 
 	CTL_PAIR( WidthAndHeight, unsigned, width, unsigned, height );
 
