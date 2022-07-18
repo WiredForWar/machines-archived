@@ -646,15 +646,15 @@ bool operator <( const SysPathName& a, const SysPathName& b )
 }
 
 // static
-void    SysPathName::rootDirectory( const SysPathName& directory )
+void SysPathName::setRootDirectory( const SysPathName& directory )
 {
-    internalRootDirectory() = directory.pathname();
-    ++currentRootId();
+	internalRootDirectory() = directory.pathname();
+	++currentRootId();
 
-    if( directory.pathname().length() > 0 )
-        internalRootDirectorySet() = true;
-    else
-        internalRootDirectorySet() = false;
+	if( directory.pathname().length() > 0 )
+		internalRootDirectorySet() = true;
+	else
+		internalRootDirectorySet() = false;
 }
 
 //  Set the root directory from the given environment variable

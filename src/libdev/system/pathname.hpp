@@ -49,7 +49,7 @@ public:
     ~SysPathName();
 
     //  Set the root directory to be used by relative pathnames
-    static  void    rootDirectory( const SysPathName& directory );
+    static void setRootDirectory( const SysPathName& directory );
 
     //  Set the root directory from the given environment variable
     static  void    rootEnvironmentVariable( const string& environmentVariable );
