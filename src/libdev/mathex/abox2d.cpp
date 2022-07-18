@@ -194,6 +194,15 @@ bool MexAlignedBox2d::operator ==( const MexAlignedBox2d& b ) const
     return ( vmin_ == b.vmin_ ) and ( vmax_ == b.vmax_ ) and ( isEmpty_ == b.isEmpty_ );
 }
 
+MexAlignedBox2d& MexAlignedBox2d::operator *=( MATHEX_SCALAR multiplier )
+{
+    vmin_ *= multiplier;
+    vmax_ *= multiplier;
+    TEST_INVARIANT;
+
+    return *this;
+}
+
 const MexPoint2d& MexAlignedBox2d::minCorner( ) const
 {
     const MexPoint2d& result = vmin_;
