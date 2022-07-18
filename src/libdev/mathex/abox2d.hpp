@@ -78,6 +78,8 @@ public:
 	bool operator !=( const MexAlignedBox2d& ) const;
 	// POST( iff( result, rhs.contains( *this ) and contains( rhs ) ) )
 
+	MexAlignedBox2d& operator *=( MATHEX_SCALAR multiplier );
+
 	const MexPoint2d& minCorner() const;
 	// POST( &result == &vmin_ ); // private
 
@@ -145,6 +147,11 @@ private:
 	bool      isEmpty_;
 
 };
+
+inline MexAlignedBox2d operator*(MexAlignedBox2d rhs, MATHEX_SCALAR c)
+{
+    return rhs *= c;
+}
 
 PER_DECLARE_PERSISTENT( MexAlignedBox2d );
 
