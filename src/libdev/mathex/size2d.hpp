@@ -18,9 +18,11 @@ public:
 
 	~MexSize2d() = default;
 
-	MexSize2d& operator =( const MexSize2d& rhs ) = default;
+	MexSize2d& operator =( const MexSize2d& rhs );
 	bool operator ==( const MexSize2d& ) const;
 	bool operator !=( const MexSize2d& ) const;
+
+	MexSize2d& operator *=( MATHEX_SCALAR multiplier );
 
 	MATHEX_SCALAR width() const;
 	MATHEX_SCALAR height() const;
@@ -36,6 +38,33 @@ private:
 	MATHEX_SCALAR width_ = 0;
 	MATHEX_SCALAR height_ = 0;
 };
+
+inline MexSize2d& MexSize2d::operator =( const MexSize2d& rhs )
+{
+	width_ = rhs.width_;
+	height_ = rhs.height_;
+
+	POST( *this == rhs );
+
+	return *this;
+}
+
+inline bool MexSize2d::operator ==( const MexSize2d& rhs ) const
+{
+	return ( width_ == rhs.width_ ) && ( height_ == rhs.height_ );
+}
+
+inline MexSize2d& MexSize2d::operator *=( MATHEX_SCALAR multiplier )
+{
+	width_ *= multiplier;
+	height_ *= multiplier;
+	return *this;
+}
+
+inline MexSize2d operator*(MexSize2d rhs, MATHEX_SCALAR c)
+{
+	return rhs *= c;
+}
 
 inline MexSize2d::MexSize2d( MATHEX_SCALAR w, MATHEX_SCALAR h)
 	: width_(w)
