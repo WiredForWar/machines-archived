@@ -2941,7 +2941,7 @@ void MachInGameScreen::setupCorralAndCommandIcons()
 	pCorral_->add( selectedActors_ );
 
 	//Construct command icons
-	Gui::Coord commandCoord( 2, pCorral_->height() + 2 );
+	Gui::Coord commandCoord( 2, pCorral_->height() / MachGui::uiSizeMultiplier() + 2 );
  	pCommandIcons_ = _NEW( MachCommandIcons( pControlPanel_, commandCoord, this ) );
 }
 
