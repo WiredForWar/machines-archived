@@ -368,7 +368,7 @@ MachGuiCorral::~MachGuiCorral()
 //static
 size_t MachCorralIcons::reqWidth()
 {
-	return ( columns() * MachGuiCorralResource::buttonWidth() );
+	return ( columns() * MachGuiCorralResource::buttonWidth() * MachGui::uiSizeMultiplier() );
 }
 
 //static
@@ -378,7 +378,7 @@ size_t MachCorralIcons::reqHeight( MachInGameScreen* pInGameScreen )
 	int height = pInGameScreen->controlPanel().getVisibleHeight() - MachGuiNavigatorBase::reqHeight() - 2;
 
 	// Make height a multiple of MachGuiCorralResource::buttonHeight
-	height -= height % MachGuiCorralResource::buttonHeight();
+	height -= height % MachGuiCorralResource::buttonHeight() * MachGui::uiSizeMultiplier();
 
 	return height;
 }
