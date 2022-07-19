@@ -31,13 +31,13 @@ MachGuiScrollButton::~MachGuiScrollButton()
 //static 
 size_t MachGuiScrollButton::reqWidth()
 {
-	return 17; // todo
+	return 17 * MachGui::uiScaleMultiplier(); // todo
 }
 
 //static 
 size_t MachGuiScrollButton::reqHeight()
 {
-	return 50; // todo
+	return 50 * MachGui::uiScaleMultiplier(); // todo
 }
 
 //virtual 
@@ -115,7 +115,7 @@ MachGuiScrollBar::MachGuiScrollBar( MachGuiScrollArea *pParent,
 									GuiSimpleScrollableList* pIcons,
 									MachInGameScreen* pInGameScreen,
 									ScrollType scrollType )
-: 	GuiDisplayable( pParent, Gui::Box( rel.x(), rel.y(), rel.x() + reqWidth(), rel.y() + reqHeight() ) * MachGui::uiSizeMultiplier() ),
+: 	GuiDisplayable( pParent, Gui::Box( rel, Gui::Size( reqWidth(), reqHeight() ) ) ),
 	pIcons_( pIcons ),
 	pInGameScreen_( pInGameScreen )
 {
@@ -123,13 +123,13 @@ MachGuiScrollBar::MachGuiScrollBar( MachGuiScrollArea *pParent,
 	SysPathNames downBmp( SysPathName( "gui/corral/scrldn_2x.png" ), SysPathName( "gui/corral/scrldn_2x.png" ) );
 	
 	pUpButton_	= _NEW( MachGuiScrollButton(this, 
-											Gui::Coord( 0, 0 ) * MachGui::uiSizeMultiplier(),
+											Gui::Coord( 0, 0 ),
 											upBmp, 
 											pIcons, 
 											scrollType == UPDOWN ? MachGuiScrollButton::UP : MachGuiScrollButton::TOP, 
 											pParent ) );
 	pDownButton_= _NEW( MachGuiScrollButton(this, 
-											Gui::Coord( 0, MachGuiScrollButton::reqHeight() ) * MachGui::uiSizeMultiplier(),
+											Gui::Coord( 0, MachGuiScrollButton::reqHeight() ),
 											downBmp, 
 											pIcons, 
 											scrollType == UPDOWN ? MachGuiScrollButton::DOWN : MachGuiScrollButton::BOTTOM, 
@@ -185,7 +185,8 @@ void MachGuiScrollArea::initialise()
 	SysPathNames upBmp( SysPathName( "gui/corral/scrlup_2x.png" ), SysPathName( "gui/corral/scrlup_2x.png" ) );
 	SysPathNames downBmp( SysPathName( "gui/corral/scrldn_2x.png" ), SysPathName( "gui/corral/scrldn_2x.png" ) );
 	
-	pList_ = createList( this, Gui::Coord( MachGuiScrollBar::reqWidth(), 1 ) * MachGui::uiSizeMultiplier(), pInGameScreen_ );
+	const int reqListYOffset = 1 * MachGui::uiScaleMultiplier();
+	pList_ = createList( this, Gui::Coord( MachGuiScrollBar::reqWidth(), reqListYOffset ), pInGameScreen_ );
 	pLHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord(0,0), pList_, pInGameScreen_, MachGuiScrollBar::TOPBOTTOM ) );
 	pRHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord( MachGuiScrollBar::reqWidth() + pList_->width(), 0 ), pList_, pInGameScreen_, MachGuiScrollBar::UPDOWN ) );
 }

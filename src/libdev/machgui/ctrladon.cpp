@@ -114,7 +114,7 @@ class MachGuiReturnToMenuBtn : public GuiButton
 {
 public:
 	MachGuiReturnToMenuBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:	GuiButton(pParent, Gui::Box( rel, 20 * MachGui::uiSizeMultiplier(), 20 * MachGui::uiSizeMultiplier() ) ),
+	:	GuiButton(pParent, Gui::Box( rel, 20 * MachGui::uiScaleMultiplier(), 20 * MachGui::uiScaleMultiplier() ) ),
 		pInGameScreen_( pInGameScreen ),
 		return1Bmp_( Gui::bitmap( "gui/misc/return1_2x.png" ) ),
 		return2Bmp_( Gui::bitmap( "gui/misc/return2_2x.png" ) )
@@ -244,7 +244,7 @@ MachGuiControlPanelAddOnImpl::MachGuiControlPanelAddOnImpl()
 #define MachGuiControlPanelAddOnHeight 66
 
 MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent, const Gui::Coord& coord, MachInGameScreen* pInGameScreen )
-:	GuiDisplayable( pParent, Gui::Box( coord, MachGuiControlPanelAddOnWidth * MachGui::uiSizeMultiplier(), MachGuiControlPanelAddOnHeight * MachGui::uiSizeMultiplier() ), GuiDisplayable::LAYER3 )
+:	GuiDisplayable( pParent, Gui::Box( coord, MachGuiControlPanelAddOnWidth * MachGui::uiScaleMultiplier(), MachGuiControlPanelAddOnHeight * MachGui::uiScaleMultiplier() ), GuiDisplayable::LAYER3 )
 {
 	pImpl_ = _NEW( MachGuiControlPanelAddOnImpl() );
 
@@ -252,8 +252,8 @@ MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent, con
 
 	pInGameScreen_ = pInGameScreen;
 
-	_NEW( MachGuiReturnToMenuBtn( this, Gui::Coord(4, 0) * MachGui::uiSizeMultiplier(), pInGameScreen ) );
-	_NEW( MachGuiCameraToggleBtn( this, Gui::Coord(4, 22) * MachGui::uiSizeMultiplier(), pInGameScreen ) );
+	_NEW( MachGuiReturnToMenuBtn( this, Gui::Coord(4, 0) * MachGui::uiScaleMultiplier(), pInGameScreen ) );
+	_NEW( MachGuiCameraToggleBtn( this, Gui::Coord(4, 22) * MachGui::uiScaleMultiplier(), pInGameScreen ) );
 
 	redrawEveryFrame( true );
 

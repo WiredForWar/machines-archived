@@ -85,13 +85,13 @@ public:
     // Inherited from GuiBitmapButtonWithFilledBorder
   	virtual const GuiBitmap& getBitmap() const
 	{
-		static GuiBitmap bmpDefcon1 = Gui::bitmap( SysPathName( "gui/commands/defco1.bmp" ) );
-		static GuiBitmap bmpDefcon2	= Gui::bitmap( SysPathName( "gui/commands/defco2.bmp" ) );
-		static GuiBitmap bmpDefcon3	= Gui::bitmap( SysPathName( "gui/commands/defco3.bmp" ) );
-	   	static GuiBitmap bmpDefcon12 = Gui::bitmap( SysPathName( "gui/commands/defco12.bmp" ) );
-		static GuiBitmap bmpDefcon23 = Gui::bitmap( SysPathName( "gui/commands/defco23.bmp" ) );
-		static GuiBitmap bmpDefcon123 = Gui::bitmap( SysPathName( "gui/commands/defco123.bmp" ) );
-		static GuiBitmap bmpDefcon13 = Gui::bitmap( SysPathName( "gui/commands/defco13.bmp" ) );
+		static GuiBitmap bmpDefcon1 = Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco1.bmp" ) ) );
+		static GuiBitmap bmpDefcon2	= Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco2.bmp" ) ) );
+		static GuiBitmap bmpDefcon3	= Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco3.bmp" ) ) );
+	   	static GuiBitmap bmpDefcon12 = Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco12.bmp" ) ) );
+		static GuiBitmap bmpDefcon23 = Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco23.bmp" ) ) );
+		static GuiBitmap bmpDefcon123 = Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco123.bmp" ) ) );
+		static GuiBitmap bmpDefcon13 = Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/commands/defco13.bmp" ) ) );
 
 		if ( MachGuiDefconCommand::defconLow() and MachGuiDefconCommand::defconNormal() and MachGuiDefconCommand::defconHigh() )
 			return bmpDefcon123;
@@ -126,7 +126,7 @@ MachCommandIcons::MachCommandIcons( GuiDisplayable * pParent,
 									const Gui::Coord& rel,
 									MachInGameScreen* pInGameScreen )
 : GuiScrollableIconSequence(pParent,
-							translateBox( arrayDimensions( (MachCommandIcon::reqWidth()*2) + 5, MachCommandIcon::reqHeight(), 11, 1 ), rel ),
+							translateBox( arrayDimensions( MachCommandIcons::reqWidth() * MachGui::uiScaleMultiplier(), MachCommandIcon::reqHeight() * MachGui::uiScaleMultiplier(), 11, 1 ), rel * MachGui::uiScaleMultiplier() ),
 							staticCoords(), 1 ),
   pInGameScreen_( pInGameScreen )
 {
@@ -174,7 +174,7 @@ MachCommandIcons::coords() const
 const GuiIconSequence::Coords&
 MachCommandIcons::staticCoords()
 {
-	static Coords coords_ = arrayCoords( MachCommandIcon::reqWidth() + 5, MachCommandIcon::reqHeight() + 1, 12, 2 );
+	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleMultiplier(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleMultiplier(), 12, 2 );
 	return coords_;
 }
 
@@ -207,7 +207,7 @@ MachSmallCommandIcons::MachSmallCommandIcons(	GuiDisplayable * pParent,
 												const Gui::Coord& rel,
 												MachInGameScreen* pInGameScreen )
 : GuiScrollableIconSequence(pParent,
-							translateBox( arrayDimensions( (MachCommandIcon::reqWidth()*2) + 5, MachCommandIcon::reqHeight(), 1, 1 ), rel ),
+							translateBox( arrayDimensions( MachSmallCommandIcons::reqWidth() * MachGui::uiScaleMultiplier(), MachSmallCommandIcons::reqHeight() * MachGui::uiScaleMultiplier(), 1, 1 ), rel ),
 							staticCoords(), 1 ),
   pInGameScreen_( pInGameScreen )
 {
@@ -255,7 +255,7 @@ MachSmallCommandIcons::coords() const
 const GuiIconSequence::Coords&
 MachSmallCommandIcons::staticCoords()
 {
-	static Coords coords_ = arrayCoords( MachCommandIcon::reqWidth() + 5, MachCommandIcon::reqHeight() + 1, 12, 2 );
+	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleMultiplier(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleMultiplier(), 12, 2 );
 	return coords_;
 }
 
@@ -325,9 +325,9 @@ std::pair< SysPathName, SysPathName > MachCommandIcon::bitmapPaths
     const MachGuiCommand& command
 ) const
 {
-    const std::pair<string, string> strings = command.iconNames();
-    return std::pair< SysPathName, SysPathName >( SysPathName( strings.first ),
-                                             SysPathName( strings.first ) );
+    std::pair<string, string> strings = command.iconNames();
+    return std::pair< SysPathName, SysPathName >( SysPathName ( MachGui::getScaledImagePath( strings.first ) ),
+                                             SysPathName( MachGui::getScaledImagePath( strings.first ) ) );
 }
 
 //virtual

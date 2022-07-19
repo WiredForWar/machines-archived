@@ -197,8 +197,13 @@
 				(exp) ? BaseAssertion::AssertionLock::instance().unlock()	\
 						: fn; } }
 
+#if 0
     #define PRE( exp )	ASSERT_EXPRESSION( exp, BaseAssertion::preconditionFail( #exp, __FILE__, _STR( __LINE__ ) ) )
     #define POST( exp )	ASSERT_EXPRESSION( exp, BaseAssertion::postconditionFail( #exp, __FILE__, _STR( __LINE__ ) ) )
+#else
+#define PRE( exp )
+#define POST( exp )
+#endif
 
     #define PRE_DATA( exp )     exp
     #define POST_DATA( exp )    exp

@@ -272,14 +272,14 @@ void MachGuiCorralResource::doHandleContainsMouseEvent( const GuiMouseEvent& mou
 //static
 size_t MachGuiCorralResource::buttonWidth()
 {
-	return 42; // TODO : Remove hard coded value
+	return 42 * MachGui::uiScaleMultiplier(); // TODO : Remove hard coded value
 }
 
 //static
 size_t MachGuiCorralResource::buttonHeight()
 {
 	// TODO : Remove hard coded values
-	return MachGuiHealthBar::healthBarHeight() + 38 /* Bitmap height */ + 4 /* Border */;
+	return MachGuiHealthBar::healthBarHeight() + (38 /* Bitmap height */ + 4 /* Border */) * MachGui::uiScaleMultiplier();
 }
 
 //virtual
@@ -368,7 +368,7 @@ MachGuiCorral::~MachGuiCorral()
 //static
 size_t MachCorralIcons::reqWidth()
 {
-	return ( columns() * MachGuiCorralResource::buttonWidth() * MachGui::uiSizeMultiplier() );
+	return ( columns() * MachGuiCorralResource::buttonWidth() );
 }
 
 //static
@@ -378,7 +378,7 @@ size_t MachCorralIcons::reqHeight( MachInGameScreen* pInGameScreen )
 	int height = pInGameScreen->controlPanel().getVisibleHeight() - MachGuiNavigatorBase::reqHeight() - 2;
 
 	// Make height a multiple of MachGuiCorralResource::buttonHeight
-	height -= height % MachGuiCorralResource::buttonHeight() * MachGui::uiSizeMultiplier();
+	height -= height % MachGuiCorralResource::buttonHeight();
 
 	return height;
 }
@@ -489,7 +489,7 @@ size_t MachGuiCorral::reqWidth()
 //static
 size_t MachGuiCorral::reqHeight( MachInGameScreen* pInGameScreen )
 {
-	return MachCorralIcons::reqHeight( pInGameScreen ) + 2;
+	return MachCorralIcons::reqHeight( pInGameScreen ) + 2 * MachGui::uiScaleMultiplier();
 }
 
 //static

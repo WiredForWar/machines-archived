@@ -142,7 +142,7 @@ void MachGuiHealthBar::doDisplay()
 //static 
 size_t MachGuiHealthBar::healthBarHeight()
 {
-	return ( BORDER_THICKNESS + SHADOW_THICKNESS + HP_THICKNESS + DIVIDER_THICKNESS + AP_THICKNESS + BORDER_THICKNESS );
+	return ( BORDER_THICKNESS + SHADOW_THICKNESS + HP_THICKNESS + DIVIDER_THICKNESS + AP_THICKNESS + BORDER_THICKNESS ) * MachGui::uiScaleMultiplier();
 }
 
 void MachGuiHealthBar::depress( bool doDepress )

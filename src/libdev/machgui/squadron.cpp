@@ -474,14 +474,14 @@ void MachGuiSquadronBankIcon::doBeDepressed( const GuiMouseEvent& )
 //static 
 size_t MachGuiSquadronBankIcon::reqWidth()
 {
-	return 29; // TODO : remove hard coding.
+	return 29 * MachGui::uiScaleMultiplier(); // TODO : remove hard coding.
 }
 
 
 //static 
 size_t MachGuiSquadronBankIcon::reqHeight()
 {
-	return 40; // TODO : remove hard coding.
+	return 40 * MachGui::uiScaleMultiplier(); // TODO : remove hard coding.
 }
 
 // virtual

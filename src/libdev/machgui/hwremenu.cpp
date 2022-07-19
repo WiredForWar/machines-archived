@@ -17,7 +17,7 @@ MachHWResearchMenu::MachHWResearchMenu( GuiDisplayable* pParent,
 										MachHWResearchBank* pHWResearchBank,
 									    const Gui::Coord& relCoord,
 									    MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen,relCoord ) ), pInGameScreen ),
+:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen,relCoord ) ) * MachGui::uiScaleMultiplier(), pInGameScreen ),
     pInGameScreen_( pInGameScreen ),
     pHWResearchBank_( pHWResearchBank ),
     pHardwareLab_( &selectedLab( pInGameScreen ) )
