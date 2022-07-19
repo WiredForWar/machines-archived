@@ -72,14 +72,14 @@ void MachGuiScrollButton::update()
 //virtual 
 const GuiBitmap& MachGuiScrollButton::getBitmap() const
 {
-	static GuiBitmap scrollUpBmp( Gui::bitmap( SysPathName( "gui/corral/scrlup.bmp" ) ) );
-	static GuiBitmap scrollUpHighlightBmp( Gui::bitmap( SysPathName( "gui/corral/scrlupH.bmp" ) ) );
-	static GuiBitmap scrollDownBmp( Gui::bitmap( SysPathName(  "gui/corral/scrldn.bmp" ) ) );
-	static GuiBitmap scrollDownHighlightBmp( Gui::bitmap( SysPathName( "gui/corral/scrldnH.bmp" ) ) );
-	static GuiBitmap scrollTopBmp( Gui::bitmap( SysPathName( "gui/corral/scrlup2.bmp" ) ) );
-	static GuiBitmap scrollTopHighlightBmp( Gui::bitmap( SysPathName( "gui/corral/scrlup2H.bmp" ) ) );
-	static GuiBitmap scrollBottomBmp( Gui::bitmap( SysPathName(  "gui/corral/scrldn2.bmp" ) ) );
-	static GuiBitmap scrollBottomHighlightBmp( Gui::bitmap( SysPathName( "gui/corral/scrldn2H.bmp" ) ) );
+	static GuiBitmap scrollUpBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrlup.bmp" ) ) ) );
+	static GuiBitmap scrollUpHighlightBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrlupH.bmp" ) ) ) );
+	static GuiBitmap scrollDownBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrldn.bmp" ) ) ) );
+	static GuiBitmap scrollDownHighlightBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrldnH.bmp" ) ) ) );
+	static GuiBitmap scrollTopBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrlup2.bmp" ) ) ) );
+	static GuiBitmap scrollTopHighlightBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrlup2H.bmp" ) ) ) );
+	static GuiBitmap scrollBottomBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrldn2.bmp" ) ) ) );
+	static GuiBitmap scrollBottomHighlightBmp( Gui::bitmap( SysPathName( MachGui::getScaledImagePath( "gui/corral/scrldn2H.bmp" ) ) ) );
 
 	GuiBitmap* pRetBitmap = NULL;
 
@@ -115,21 +115,21 @@ MachGuiScrollBar::MachGuiScrollBar( MachGuiScrollArea *pParent,
 									GuiSimpleScrollableList* pIcons,
 									MachInGameScreen* pInGameScreen,
 									ScrollType scrollType )
-: 	GuiDisplayable( pParent, Gui::Box( rel.x(), rel.y(), rel.x() + reqWidth(), rel.y() + reqHeight() ) ),
+: 	GuiDisplayable( pParent, Gui::Box( rel.x(), rel.y(), rel.x() + reqWidth(), rel.y() + reqHeight() ) * MachGui::uiSizeMultiplier() ),
 	pIcons_( pIcons ),
 	pInGameScreen_( pInGameScreen )
 {
-	SysPathNames upBmp( SysPathName( "gui/corral/scrlup.bmp" ), SysPathName( "gui/corral/scrlup.bmp" ) );
-	SysPathNames downBmp( SysPathName( "gui/corral/scrldn.bmp" ), SysPathName( "gui/corral/scrldn.bmp" ) );
+	SysPathNames upBmp( SysPathName( "gui/corral/scrlup_2x.png" ), SysPathName( "gui/corral/scrlup_2x.png" ) );
+	SysPathNames downBmp( SysPathName( "gui/corral/scrldn_2x.png" ), SysPathName( "gui/corral/scrldn_2x.png" ) );
 	
 	pUpButton_	= _NEW( MachGuiScrollButton(this, 
-											Gui::Coord( 0, 0 ), 
+											Gui::Coord( 0, 0 ) * MachGui::uiSizeMultiplier(),
 											upBmp, 
 											pIcons, 
 											scrollType == UPDOWN ? MachGuiScrollButton::UP : MachGuiScrollButton::TOP, 
 											pParent ) );
 	pDownButton_= _NEW( MachGuiScrollButton(this, 
-											Gui::Coord( 0, MachGuiScrollButton::reqHeight() ), 
+											Gui::Coord( 0, MachGuiScrollButton::reqHeight() ) * MachGui::uiSizeMultiplier(),
 											downBmp, 
 											pIcons, 
 											scrollType == UPDOWN ? MachGuiScrollButton::DOWN : MachGuiScrollButton::BOTTOM, 
@@ -182,10 +182,10 @@ void MachGuiScrollArea::initialise()
 {					
 	DEBUG_STREAM( DIAG_NEIL, "MachGuiScrollArea::initialise()" << std::endl );
 
-	SysPathNames upBmp( SysPathName( "gui/corral/scrlup.bmp" ), SysPathName( "gui/corral/scrlup.bmp" ) );
-	SysPathNames downBmp( SysPathName( "gui/corral/scrldn.bmp" ), SysPathName( "gui/corral/scrldn.bmp" ) );
+	SysPathNames upBmp( SysPathName( "gui/corral/scrlup_2x.png" ), SysPathName( "gui/corral/scrlup_2x.png" ) );
+	SysPathNames downBmp( SysPathName( "gui/corral/scrldn_2x.png" ), SysPathName( "gui/corral/scrldn_2x.png" ) );
 	
-	pList_ = createList( this, Gui::Coord( MachGuiScrollBar::reqWidth(), 1 ), pInGameScreen_ );
+	pList_ = createList( this, Gui::Coord( MachGuiScrollBar::reqWidth(), 1 ) * MachGui::uiSizeMultiplier(), pInGameScreen_ );
 	pLHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord(0,0), pList_, pInGameScreen_, MachGuiScrollBar::TOPBOTTOM ) );
 	pRHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord( MachGuiScrollBar::reqWidth() + pList_->width(), 0 ), pList_, pInGameScreen_, MachGuiScrollBar::UPDOWN ) );
 }

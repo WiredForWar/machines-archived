@@ -18,7 +18,7 @@ MachBuildMenu::MachBuildMenu( 	GuiDisplayable* pParent,
 								MachProductionBank* pProductionBank, 
 								const Gui::Coord& coord,
 								MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( coord, reqWidth(), reqHeight( pInGameScreen, coord ) ), pInGameScreen ),
+:   MachGuiScrollArea( pParent, Gui::Box( coord, reqWidth(), reqHeight( pInGameScreen, coord ) ) * MachGui::uiSizeMultiplier(), pInGameScreen ),
     pInGameScreen_( pInGameScreen ),
     pProductionBank_( pProductionBank ),
     pFactory_( &selectedFactory( pInGameScreen ) )

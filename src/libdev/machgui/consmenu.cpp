@@ -10,7 +10,7 @@
 #include "machgui/ingame.hpp"
 
 MachConstructMenu::MachConstructMenu( GuiDisplayable* pParent, const Gui::Coord& relCoord, MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen ) ), pInGameScreen )
+:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen ) ) * MachGui::uiSizeMultiplier(), pInGameScreen )
 {
 
     TEST_INVARIANT;
