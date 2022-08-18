@@ -36,13 +36,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         message(WARNING "${PROJECT_NAME} will be built for compiler default target architecture.")
     endif()
 
-    set(NORMAL_CXX_FLAGS "${MACHINES_COMPILER_BIT_MODE} -Wall -Wold-style-cast -Wmissing-declarations")
-    set(NORMAL_C_FLAGS " ${MACHINES_COMPILER_BIT_MODE} -Wall")
-    set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wno-error=deprecated-declarations") # updated version of physfs is not available on some platforms so we keep using deprecated functions, see #958
+    #set(NORMAL_CXX_FLAGS "${MACHINES_COMPILER_BIT_MODE} -Wall -Wold-style-cast -Wmissing-declarations")
+    #set(NORMAL_C_FLAGS " ${MACHINES_COMPILER_BIT_MODE} -Wall")
+    #set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wno-error=deprecated-declarations") # updated version of physfs is not available on some platforms so we keep using deprecated functions, see #958
 
-    if(NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 5.0)
-        set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wsuggest-override")
-    endif()
+    #if(NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS 5.0)
+    #    set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wsuggest-override")
+    #endif()
 
     set(RELEASE_CXX_FLAGS "-O2")
     set(DEBUG_CXX_FLAGS "-gstabs -O0")
@@ -52,8 +52,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         message(FATAL_ERROR "${PROJECT_NAME} requires Clang 3.1 or greater.")
     endif()
 
-    set(NORMAL_CXX_FLAGS "${MACHINES_COMPILER_BIT_MODE} -Wall -Werror -Wold-style-cast -pedantic-errors -Wmissing-prototypes")
-    set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wno-error=deprecated-declarations") # updated version of physfs is not available on some platforms so we keep using deprecated functions, see #958
+    #set(NORMAL_CXX_FLAGS "${MACHINES_COMPILER_BIT_MODE} -Wall -Werror -Wold-style-cast -pedantic-errors -Wmissing-prototypes")
+    #set(NORMAL_CXX_FLAGS "${NORMAL_CXX_FLAGS} -Wno-error=deprecated-declarations") # updated version of physfs is not available on some platforms so we keep using deprecated functions, see #958
     set(RELEASE_CXX_FLAGS "-O2")
     set(DEBUG_CXX_FLAGS "-g -O0")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
