@@ -77,6 +77,55 @@ include(Utils)
 option_on_off_auto(BUILD_WITH_SWSCALE "Build with SWScale support" "Auto")
 option_on_off_auto(BUILD_WITH_ALURE "Build with Alure support" "Auto")
 
+option(USE_CONAN "Use Conan for dependencies" OFF)
+
+if(USE_CONAN)
+    set(CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}" ${CMAKE_MODULE_PATH})
+    set(CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}" ${CMAKE_PREFIX_PATH})
+
+    set(CMAKE_CXX_STANDARD 14)
+
+    include(cmake/conan.cmake)
+
+    if(PLATFORM_LINUX)
+        set(CONAN_PLATFORM_DEPS
+            libalsa/1.2.7.2
+            wayland/1.21.0 # (override for 'vulkan-loader/1.3.221' / 'sdl/2.0.20')
+        )
+    endif()
+
+    conan_cmake_configure(
+        REQUIRES
+            sdl/2.0.20
+            sdl_image/2.0.5
+            glew/2.2.0
+            glm/0.9.9.8
+            openal/1.22.2
+            enet/1.3.17
+            freetype/2.11.1
+            # swscale:
+            ffmpeg/5.0
+            ${CONAN_PLATFORM_DEPS}
+            # Overrides:
+            # libfdk_aac/2.0.1
+            openssl/1.1.1q
+            libwebp/1.2.3
+            zlib/1.2.12
+        OPTIONS
+            # *:shared=False
+            # openssl:shared=True
+        GENERATORS
+            cmake_find_package
+    )
+
+    conan_cmake_autodetect(settings)
+
+    conan_cmake_install(PATH_OR_REFERENCE .
+        BUILD missing
+        REMOTE conancenter
+        SETTINGS ${settings})
+endif()
+
 # 32 bit build configuration
 option(BUILD_32 "Builds 32 bit executable" OFF)
 # Include cmake directory with some additions
@@ -140,20 +189,30 @@ find_package(glm REQUIRED)
 include(EnsureOpenALTarget)
 
 find_optional_dependency(Alure)
-find_optional_dependency(SWScale)
 
 find_package(enet REQUIRED)
 find_package(Freetype REQUIRED)
+
+if(USE_CONAN)
+    set(BUILD_WITH_FFMPEG ${BUILD_WITH_SWSCALE})
+    find_optional_dependency(ffmpeg COMPONENTS swscale)
+    set(USE_SWSCALE ${USE_FFMPEG})
+
+    set(GLEW_LIBRARY GLEW::GLEW)
+    set(FREETYPE_LIBRARY Freetype::Freetype)
+else()
+    find_optional_dependency(SWScale)
+
+    # CMake Freetype find package sets only the capital-case variable
+    set(Freetype_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIRS})
+endif()
 
 if(NOT DEV_BUILD)
     add_definitions(-DNDEBUG)
     add_definitions(-DPRODUCTION)
 endif()
 
-# CMake Freetype find package sets only the capital-case variable
-set(Freetype_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIRS})
-
-if(PLATFORM_WINDOWS)
+if(PLATFORM_WINDOWS AND NOT USE_CONAN)
   if(NOT BUILD_32)
     find_library(MSVCRT_LIBRARY msvcrt HINTS ${WINDOWS_DEPENDENCIES_DIR})
     find_library(FREETYPE_LIBRARY freetype HINTS ${WINDOWS_DEPENDENCIES_DIR})
