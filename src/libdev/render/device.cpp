@@ -2276,7 +2276,7 @@ void RenDevice::renderIndexed
         GL_FLOAT, // type
         GL_FALSE, // normalized?
         sizeof (RenIVertex), // stride
-        (void*) (sizeof (RenIVertex) - 2 * sizeof (float)) // array buffer offset
+        (void*)offsetof( RenIVertex, tu ) // array buffer offset
         );
 
     // vertex colours
@@ -2287,7 +2287,7 @@ void RenDevice::renderIndexed
         GL_UNSIGNED_BYTE, // type
         GL_TRUE, // normalized?
         sizeof (RenIVertex), // stride
-        (void*) (3 * sizeof (float) + sizeof (uint32_t)) // array buffer offset
+        (void*)offsetof( RenIVertex, color ) // array buffer offset
         );
 
     // 3rd attribute buffer : normals
