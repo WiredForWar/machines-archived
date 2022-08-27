@@ -137,6 +137,7 @@ void RenIDistinctGroup::render(const RenIVertexData& vtx, const RenMaterial& mat
         glEnable(GL_CULL_FACE);
 }
 
+// renders onfloor shadows and flat platforms
 // virtual
 void RenIDistinctGroup::render(const RenI::LitVtxAPtr& vtx, const RenMaterial& mat) const
 {
