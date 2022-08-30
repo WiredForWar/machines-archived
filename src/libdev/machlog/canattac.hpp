@@ -225,8 +225,8 @@ protected:
 	void checkAndAttackCloserTarget( MachLogMissileEmplacement* pActor, MachActor* pFiredAtMe = NULL );
 	void checkAndAttackCloserTarget( MachLogPod* pActor, MachActor* pFiredAtMe = NULL );
 //	void checkAndAttackCloserTarget( MachLogAdministrator* );
+    void checkAndHealCloserTarget( MachLogMachine* pActor );
 //	bool targetBehindSoftCover( MachLogMachine* pActor, MachActor* );
-
 
     bool inAngleRange( const W4dEntity& entity ) const;
 	static MexRadians angleRange();

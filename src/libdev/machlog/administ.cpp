@@ -79,10 +79,18 @@ PhysRelativeTime MachLogAdministrator::update( const PhysRelativeTime& maxCPUTim
 	//Do the main work
 	DEBUG_STREAM( DIAG_HAL,"(" << id() << ") MLAdministrator::update\n" );
 
-	if( not( isDead() or isDying() or evading() or insideAPC() )
-		and not MachLogRaces::instance().inSpecialActorUpdate()
-		and willCheckForTargets() )
-		checkAndAttackCloserTarget( this );
+    if ( not( isDead() or isDying() or evading() or insideAPC() )
+         and not MachLogRaces::instance().inSpecialActorUpdate() )
+    {
+        if ( willCheckForTargets() )
+        {
+            checkAndAttackCloserTarget( this );
+        }
+        if ( hasHealingWeapon() )
+        {
+            checkAndHealCloserTarget( this );
+        }
+    }
 
 	diminishAlertnessAndInaccuracy();
 
