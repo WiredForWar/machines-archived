@@ -197,13 +197,31 @@ RenAnimCursor2d* MachInGameCursors2d::loadCursor( const string& baseName, int nF
     int height = 0;
     //char index = '1';
 
-	char buffer[3];
+    char buffer[ 3 ];
+
+    string cursorDir = "gui/cursor/";
+    std::string extention;
+
+    std::string basePath = cursorDir + baseName;
+    {
+        std::string withFrames = nFrames > 1 ? basePath + "1" : basePath;
+        const char* pPossibleExtentions[] = { "_2x.png", ".png", ".bmp" };
+        for ( const char* pExtention : pPossibleExtentions )
+        {
+            if ( SysPathName::existsAsFile( withFrames + pExtention ) )
+            {
+                extention = pExtention;
+                break;
+            }
+        }
+
+        ASSERT( !extention.empty(), "Unable to load a cursor: file not found" );
+    }
 
     for( int i = 0; i < nFrames; ++i )
     {
         //Construct the full name
-        string name = "gui/cursor/";
-        name += baseName;
+        std::string name = basePath;
         if( nFrames > 1 )
         {
 			int frameNumber = i+1;
@@ -211,7 +229,8 @@ RenAnimCursor2d* MachInGameCursors2d::loadCursor( const string& baseName, int nF
             sprintf(buffer, "%d", frameNumber);
             name += buffer;
         }
-        name += ".bmp";
+
+        name += extention;
         //++index;
 
         //Create the surface
