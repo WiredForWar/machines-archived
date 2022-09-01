@@ -165,20 +165,20 @@ void MachInGameCursors2d::loadCursors()
 	pMoveCursor_[SMALLCURSORS] 			= loadCursor( "small/move", 4 );
 
     //The menu cursor and construct cursors has its origin at top left
-    pMenuCursor_->origin( MexPoint2d( 0, 0 ) );
-    pConstructCursor_->origin( MexPoint2d( 0, 0 ) );
-    pScrollSouthCursor_->origin( MexPoint2d( 6, 13 ) );
-    pScrollNorthCursor_->origin( MexPoint2d( 6, 0 ) );
-    pScrollEastCursor_->origin( MexPoint2d( 13, 6 ) );
-    pScrollWestCursor_->origin( MexPoint2d( 0, 6 ) );
-    pScrollNorthWestCursor_->origin( MexPoint2d( 0, 0 ) );
-    pScrollNorthEastCursor_->origin( MexPoint2d( 14, 0 ) );
-    pScrollSouthWestCursor_->origin( MexPoint2d( 0, 14 ) );
-    pScrollSouthEastCursor_->origin( MexPoint2d( 14, 14 ) );
-    pIonAttackCursor_->origin( MexPoint2d( 27, 38 ) );
-    pScavengeCursor_->origin( MexPoint2d( 8, 15 ) );
-    pLocateToCursor_->origin( MexPoint2d( 8, 14 ) );
-    pTreacheryCursor_->origin( MexPoint2d( 4, 4 ) );
+    pMenuCursor_->origin( MexPoint2d( 0, 0 ) * MachGui::uiScaleFactor() );
+    pConstructCursor_->origin( MexPoint2d( 0, 0 ) * MachGui::uiScaleFactor() );
+    pScrollSouthCursor_->origin( MexPoint2d( 6, 13 ) * MachGui::uiScaleFactor() );
+    pScrollNorthCursor_->origin( MexPoint2d( 6, 0 ) * MachGui::uiScaleFactor() );
+    pScrollEastCursor_->origin( MexPoint2d( 13, 6 ) * MachGui::uiScaleFactor() );
+    pScrollWestCursor_->origin( MexPoint2d( 0, 6 ) * MachGui::uiScaleFactor() );
+    pScrollNorthWestCursor_->origin( MexPoint2d( 0, 0 ) * MachGui::uiScaleFactor() );
+    pScrollNorthEastCursor_->origin( MexPoint2d( 14, 0 ) * MachGui::uiScaleFactor() );
+    pScrollSouthWestCursor_->origin( MexPoint2d( 0, 14 ) * MachGui::uiScaleFactor() );
+    pScrollSouthEastCursor_->origin( MexPoint2d( 14, 14 ) * MachGui::uiScaleFactor() );
+    pIonAttackCursor_->origin( MexPoint2d( 27, 38 ) * MachGui::uiScaleFactor() );
+    pScavengeCursor_->origin( MexPoint2d( 8, 15 ) * MachGui::uiScaleFactor() );
+    pLocateToCursor_->origin( MexPoint2d( 8, 14 ) * MachGui::uiScaleFactor() );
+    pTreacheryCursor_->origin( MexPoint2d( 4, 4 ) * MachGui::uiScaleFactor() );
 }
 
 RenAnimCursor2d* MachInGameCursors2d::loadCursor( const string& baseName, int nFrames )
