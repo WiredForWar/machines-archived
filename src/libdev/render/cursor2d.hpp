@@ -8,6 +8,7 @@
 
 #include "base/base.hpp"
 
+class MexPoint2d;
 class RenSurface;
 
 // An abstraction for a mouse cursor bitmap.  The displayed bitmap may be 
@@ -27,7 +28,7 @@ public:
 	virtual void print(ostream& o) const = 0;
 	
 	// The cursor will be at these coordinates in the bitmap.
-	void origin(int x, int y);
+    void origin( const MexPoint2d& point );
 	int  originX() const;
 	int  originY() const;
 	

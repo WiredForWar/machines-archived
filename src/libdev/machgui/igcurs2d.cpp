@@ -165,20 +165,20 @@ void MachInGameCursors2d::loadCursors()
 	pMoveCursor_[SMALLCURSORS] 			= loadCursor( "small/move", 4 );
 
     //The menu cursor and construct cursors has its origin at top left
-    pMenuCursor_->origin( 0, 0 );
-    pConstructCursor_->origin( 0, 0 );
-	pScrollSouthCursor_->origin( 6, 13 );
-	pScrollNorthCursor_->origin( 6, 0 );
-	pScrollEastCursor_->origin( 13, 6 );
-	pScrollWestCursor_->origin( 0, 6 );
-	pScrollNorthWestCursor_->origin( 0, 0 );
-	pScrollNorthEastCursor_->origin( 14,0 );
-	pScrollSouthWestCursor_->origin( 0, 14 );
-	pScrollSouthEastCursor_->origin( 14,14 );
-	pIonAttackCursor_->origin( 27,38 );
-	pScavengeCursor_->origin( 8,15 );
-	pLocateToCursor_->origin( 8,14 );
-	pTreacheryCursor_->origin( 4,4 );
+    pMenuCursor_->origin( MexPoint2d( 0, 0 ) );
+    pConstructCursor_->origin( MexPoint2d( 0, 0 ) );
+    pScrollSouthCursor_->origin( MexPoint2d( 6, 13 ) );
+    pScrollNorthCursor_->origin( MexPoint2d( 6, 0 ) );
+    pScrollEastCursor_->origin( MexPoint2d( 13, 6 ) );
+    pScrollWestCursor_->origin( MexPoint2d( 0, 6 ) );
+    pScrollNorthWestCursor_->origin( MexPoint2d( 0, 0 ) );
+    pScrollNorthEastCursor_->origin( MexPoint2d( 14, 0 ) );
+    pScrollSouthWestCursor_->origin( MexPoint2d( 0, 14 ) );
+    pScrollSouthEastCursor_->origin( MexPoint2d( 14, 14 ) );
+    pIonAttackCursor_->origin( MexPoint2d( 27, 38 ) );
+    pScavengeCursor_->origin( MexPoint2d( 8, 15 ) );
+    pLocateToCursor_->origin( MexPoint2d( 8, 14 ) );
+    pTreacheryCursor_->origin( MexPoint2d( 4, 4 ) );
 }
 
 RenAnimCursor2d* MachInGameCursors2d::loadCursor( const string& baseName, int nFrames )
@@ -260,7 +260,7 @@ RenAnimCursor2d* MachInGameCursors2d::loadCursor( const string& baseName, int nF
     }
 
     //Set the origin
-    pCursor->origin( width / 2, height / 2 );
+    pCursor->origin( MexPoint2d( width / 2, height / 2 ) );
 
     //set the frame rate
     pCursor->targetFrequency( twiceManyFrames ? 20 : 10 );

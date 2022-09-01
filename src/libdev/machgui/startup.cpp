@@ -230,7 +230,7 @@ MachGuiStartupScreens::MachGuiStartupScreens( W4dSceneManager* pSceneManager, W4
 
     pMenuCursor_ = MachInGameCursors2d::loadCursor( "large/arrow", 1 );
 
-	pMenuCursor_->origin(0,0);
+    pMenuCursor_->origin( MexPoint2d( 0, 0 ) );
 
 	pReporter->report( 1, 100 ); // 1% of gui stuff done
 

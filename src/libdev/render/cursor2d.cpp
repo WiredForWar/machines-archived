@@ -3,6 +3,7 @@
  * (c) Charybdis Limited, 1997. All Rights Reserved
  */
 
+#include "mathex/point2d.hpp"
 #include "render/cursor2d.hpp"
 
 RenCursor2d::RenCursor2d():
@@ -16,10 +17,10 @@ RenCursor2d::~RenCursor2d()
 {
 }
 
-void RenCursor2d::origin(int x, int y)
+void RenCursor2d::origin( const MexPoint2d& point )
 {
-	ox_ = x;
-	oy_ = y;
+    ox_ = point.x();
+    oy_ = point.y();
 }
 
 int  RenCursor2d::originX() const
