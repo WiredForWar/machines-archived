@@ -79,13 +79,13 @@ void MachBuildMachineIcon::doBeReleased(const GuiMouseEvent& )
 //static
 size_t MachBuildMachineIcon::reqWidth()
 {
-	return 42 * MachGui::uiScaleMultiplier();  // TODO : remove hardcoded value
+	return 42 * MachGui::uiScaleFactor();  // TODO : remove hardcoded value
 }
 
 //static
 size_t MachBuildMachineIcon::reqHeight()
 {
-	return 42 * MachGui::uiScaleMultiplier(); // TODO : remove hardcoded value
+	return 42 * MachGui::uiScaleFactor(); // TODO : remove hardcoded value
 }
 
 //virtual

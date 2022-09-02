@@ -661,11 +661,11 @@ public:
 
 	static size_t reqWidth()
 	{
-		return 20 * MachGui::uiScaleMultiplier(); //TODO : remove hardcoded value
+		return 20 * MachGui::uiScaleFactor(); //TODO : remove hardcoded value
 	}
 	static size_t reqHeight()
 	{
-		return 33 * MachGui::uiScaleMultiplier(); //TODO : remove hardcoded value
+		return 33 * MachGui::uiScaleFactor(); //TODO : remove hardcoded value
 	}
 protected:
 	void cycleThroughActors()

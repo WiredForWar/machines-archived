@@ -113,12 +113,13 @@ class MachGuiReturnToMenuBtn : public GuiButton
 // cannonical from revoked
 {
 public:
-	MachGuiReturnToMenuBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:	GuiButton(pParent, Gui::Box( rel, 20 * MachGui::uiScaleMultiplier(), 20 * MachGui::uiScaleMultiplier() ) ),
-		pInGameScreen_( pInGameScreen ),
-		return1Bmp_( Gui::bitmap( "gui/misc/return1_2x.png" ) ),
-		return2Bmp_( Gui::bitmap( "gui/misc/return2_2x.png" ) )
-	{}
+    MachGuiReturnToMenuBtn( GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
+        : GuiButton( pParent, Gui::Box( rel, 20 * MachGui::uiScaleFactor(), 20 * MachGui::uiScaleFactor() ) )
+        , pInGameScreen_( pInGameScreen )
+        , return1Bmp_( Gui::bitmap( "gui/misc/return1_2x.png" ) )
+        , return2Bmp_( Gui::bitmap( "gui/misc/return2_2x.png" ) )
+    {
+    }
 
 protected:
 	// inherited from GuiIcon...
@@ -243,19 +244,25 @@ MachGuiControlPanelAddOnImpl::MachGuiControlPanelAddOnImpl()
 #define MachGuiControlPanelAddOnWidth 30
 #define MachGuiControlPanelAddOnHeight 66
 
-MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent, const Gui::Coord& coord, MachInGameScreen* pInGameScreen )
-:	GuiDisplayable( pParent, Gui::Box( coord, MachGuiControlPanelAddOnWidth * MachGui::uiScaleMultiplier(), MachGuiControlPanelAddOnHeight * MachGui::uiScaleMultiplier() ), GuiDisplayable::LAYER3 )
+MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent,
+                                                    const Gui::Coord& coord,
+                                                    MachInGameScreen* pInGameScreen )
+    : GuiDisplayable( pParent,
+                      Gui::Box( coord,
+                                MachGuiControlPanelAddOnWidth * MachGui::uiScaleFactor(),
+                                MachGuiControlPanelAddOnHeight * MachGui::uiScaleFactor() ),
+                      GuiDisplayable::LAYER3 )
 {
 	pImpl_ = _NEW( MachGuiControlPanelAddOnImpl() );
 
-	CB_DEPIMPL( MachInGameScreen*, pInGameScreen_ );
+    CB_DEPIMPL( MachInGameScreen*, pInGameScreen_ );
 
-	pInGameScreen_ = pInGameScreen;
+    pInGameScreen_ = pInGameScreen;
 
-	_NEW( MachGuiReturnToMenuBtn( this, Gui::Coord(4, 0) * MachGui::uiScaleMultiplier(), pInGameScreen ) );
-	_NEW( MachGuiCameraToggleBtn( this, Gui::Coord(4, 22) * MachGui::uiScaleMultiplier(), pInGameScreen ) );
+    _NEW( MachGuiReturnToMenuBtn( this, Gui::Coord( 4, 0 ) * MachGui::uiScaleFactor(), pInGameScreen ) );
+    _NEW( MachGuiCameraToggleBtn( this, Gui::Coord( 4, 22 ) * MachGui::uiScaleFactor(), pInGameScreen ) );
 
-	redrawEveryFrame( true );
+    redrawEveryFrame( true );
 
     TEST_INVARIANT;
 }

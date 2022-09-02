@@ -31,13 +31,13 @@ MachGuiScrollButton::~MachGuiScrollButton()
 //static 
 size_t MachGuiScrollButton::reqWidth()
 {
-	return 17 * MachGui::uiScaleMultiplier(); // todo
+	return 17 * MachGui::uiScaleFactor(); // todo
 }
 
 //static 
 size_t MachGuiScrollButton::reqHeight()
 {
-	return 50 * MachGui::uiScaleMultiplier(); // todo
+	return 50 * MachGui::uiScaleFactor(); // todo
 }
 
 //virtual 
@@ -185,7 +185,7 @@ void MachGuiScrollArea::initialise()
 	SysPathNames upBmp( SysPathName( "gui/corral/scrlup_2x.png" ), SysPathName( "gui/corral/scrlup_2x.png" ) );
 	SysPathNames downBmp( SysPathName( "gui/corral/scrldn_2x.png" ), SysPathName( "gui/corral/scrldn_2x.png" ) );
 	
-	const int reqListYOffset = 1 * MachGui::uiScaleMultiplier();
+	const int reqListYOffset = 1 * MachGui::uiScaleFactor();
 	pList_ = createList( this, Gui::Coord( MachGuiScrollBar::reqWidth(), reqListYOffset ), pInGameScreen_ );
 	pLHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord(0,0), pList_, pInGameScreen_, MachGuiScrollBar::TOPBOTTOM ) );
 	pRHSScrollBar_ = _NEW( MachGuiScrollBar( this, Gui::Coord( MachGuiScrollBar::reqWidth() + pList_->width(), 0 ), pList_, pInGameScreen_, MachGuiScrollBar::UPDOWN ) );

@@ -126,7 +126,7 @@ MachCommandIcons::MachCommandIcons( GuiDisplayable * pParent,
 									const Gui::Coord& rel,
 									MachInGameScreen* pInGameScreen )
 : GuiScrollableIconSequence(pParent,
-							translateBox( arrayDimensions( MachCommandIcons::reqWidth() * MachGui::uiScaleMultiplier(), MachCommandIcon::reqHeight() * MachGui::uiScaleMultiplier(), 11, 1 ), rel * MachGui::uiScaleMultiplier() ),
+							translateBox( arrayDimensions( MachCommandIcons::reqWidth() * MachGui::uiScaleFactor(), MachCommandIcon::reqHeight() * MachGui::uiScaleFactor(), 11, 1 ), rel * MachGui::uiScaleFactor() ),
 							staticCoords(), 1 ),
   pInGameScreen_( pInGameScreen )
 {
@@ -174,7 +174,7 @@ MachCommandIcons::coords() const
 const GuiIconSequence::Coords&
 MachCommandIcons::staticCoords()
 {
-	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleMultiplier(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleMultiplier(), 12, 2 );
+	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleFactor(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleFactor(), 12, 2 );
 	return coords_;
 }
 
@@ -207,7 +207,7 @@ MachSmallCommandIcons::MachSmallCommandIcons(	GuiDisplayable * pParent,
 												const Gui::Coord& rel,
 												MachInGameScreen* pInGameScreen )
 : GuiScrollableIconSequence(pParent,
-							translateBox( arrayDimensions( MachSmallCommandIcons::reqWidth() * MachGui::uiScaleMultiplier(), MachSmallCommandIcons::reqHeight() * MachGui::uiScaleMultiplier(), 1, 1 ), rel ),
+							translateBox( arrayDimensions( MachSmallCommandIcons::reqWidth() * MachGui::uiScaleFactor(), MachSmallCommandIcons::reqHeight() * MachGui::uiScaleFactor(), 1, 1 ), rel ),
 							staticCoords(), 1 ),
   pInGameScreen_( pInGameScreen )
 {
@@ -255,7 +255,7 @@ MachSmallCommandIcons::coords() const
 const GuiIconSequence::Coords&
 MachSmallCommandIcons::staticCoords()
 {
-	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleMultiplier(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleMultiplier(), 12, 2 );
+	static Coords coords_ = arrayCoords( (MachCommandIcon::reqWidth() + 5) * MachGui::uiScaleFactor(), (MachCommandIcon::reqHeight() + 1) * MachGui::uiScaleFactor(), 12, 2 );
 	return coords_;
 }
 

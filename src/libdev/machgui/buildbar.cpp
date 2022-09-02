@@ -84,7 +84,7 @@ void MachGuiBuildProgressBar::doDisplay()
 //static
 size_t MachGuiBuildProgressBar::height()
 {
-	return ( BORDER_THICKNESS + SHADOW_THICKNESS + BAR_THICKNESS + BORDER_THICKNESS ) * MachGui::uiScaleMultiplier();
+	return ( BORDER_THICKNESS + SHADOW_THICKNESS + BAR_THICKNESS + BORDER_THICKNESS ) * MachGui::uiScaleFactor();
 }
 
 void MachGuiBuildProgressBar::percentageComplete( float complete )

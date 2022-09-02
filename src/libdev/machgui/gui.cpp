@@ -684,25 +684,25 @@ std::string MachGui::getScaledImagePath(const char* pBasePath)
 //static
 int MachGui::controlPanelInXPos()
 {
-	return 6 * s_uiScaleMultiplier;
+	return 6 * s_uiScaleFactor;
 }
 
 //static
 int MachGui::controlPanelOutXPos()
 {
-	return 169 * s_uiScaleMultiplier;
+	return 169 * s_uiScaleFactor;
 }
 
 //static
 int MachGui::controlPanelSlideInSpeed()
 {
-	return 15 * s_uiScaleMultiplier;
+	return 15 * s_uiScaleFactor;
 }
 
 //static
 int MachGui::controlPanelSlideOutSpeed()
 {
-	return 20 * s_uiScaleMultiplier;
+	return 20 * s_uiScaleFactor;
 }
 
 //static
@@ -720,7 +720,7 @@ int MachGui::promptTextYOffset()
 //static
 int MachGui::mapAreaHeight()
 {
-	return 129 * s_uiScaleMultiplier;
+	return 129 * s_uiScaleFactor;
 }
 
 //static

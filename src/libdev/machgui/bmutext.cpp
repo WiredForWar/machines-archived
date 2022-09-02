@@ -19,7 +19,7 @@
 #include "machgui/internal/mgsndman.hpp"
 
 MachGuiBmuText::MachGuiBmuText( GuiDisplayable* pParent, const Gui::Coord& relPos )
-:	GuiDisplayable( pParent, Gui::Boundary( relPos, 126 * MachGui::uiScaleMultiplier(), 10 * MachGui::uiScaleMultiplier() ) )
+:	GuiDisplayable( pParent, Gui::Boundary( relPos, 126 * MachGui::uiScaleFactor(), 10 * MachGui::uiScaleFactor() ) )
 {
 	DEBUG_STREAM( DIAG_NEIL, "Creating MachGuiBmuText" << std::endl );
 

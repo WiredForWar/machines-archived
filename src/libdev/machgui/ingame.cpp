@@ -188,7 +188,7 @@ MachInGameScreen::MachInGameScreen( W4dSceneManager* pSceneManager, W4dRoot* pRo
 	pReporter->report( 35, 100 ); // 35% done
 
     //Construct continent map
-	pContinentMap_ = _NEW( MachContinentMap( pMapArea_, Gui::Coord( 2, 1 ) * MachGui::uiScaleMultiplier(), pCameras_, this ) );
+	pContinentMap_ = _NEW( MachContinentMap( pMapArea_, Gui::Coord( 2, 1 ) * MachGui::uiScaleFactor(), pCameras_, this ) );
 	pReporter->report( 40, 100 ); // 40% done
 
 	//Construct buttons down side of continent map
@@ -207,10 +207,10 @@ MachInGameScreen::MachInGameScreen( W4dSceneManager* pSceneManager, W4dRoot* pRo
  	pReporter->report( 50, 100 ); // 50% done
 
 	//Construct single icon corral
-	pCorralSingleIcon_ = _NEW( MachGuiCorralSingleIcon( pControlPanel_, Gui::Coord( 1 * MachGui::uiScaleMultiplier(), 0 ), this ) );
+	pCorralSingleIcon_ = _NEW( MachGuiCorralSingleIcon( pControlPanel_, Gui::Coord( 1 * MachGui::uiScaleFactor(), 0 ), this ) );
 
 	//Construct small command icons
-	Gui::Coord smallCommandCoord( 2 * MachGui::uiScaleMultiplier(), pCorralSingleIcon_->height() + 2 );
+	Gui::Coord smallCommandCoord( 2 * MachGui::uiScaleFactor(), pCorralSingleIcon_->height() + 2 );
 	pSmallCommandIcons_= _NEW( MachSmallCommandIcons( pControlPanel_, smallCommandCoord, this ) );
 	pReporter->report( 55, 100 ); // 55% done
 
@@ -2941,7 +2941,7 @@ void MachInGameScreen::setupCorralAndCommandIcons()
 	pCorral_->add( selectedActors_ );
 
 	//Construct command icons
-	Gui::Coord commandCoord( 2, pCorral_->height() / MachGui::uiScaleMultiplier() + 2 );
+	Gui::Coord commandCoord( 2, pCorral_->height() / MachGui::uiScaleFactor() + 2 );
  	pCommandIcons_ = _NEW( MachCommandIcons( pControlPanel_, commandCoord, this ) );
 }
 
