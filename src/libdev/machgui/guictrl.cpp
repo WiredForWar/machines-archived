@@ -46,29 +46,29 @@ MachGuiIconWithCounter::~MachGuiIconWithCounter()
 //virtual 
 void MachGuiIconWithCounter::doDisplayInteriorEnabled( const Gui::Coord& abs )
 {
-	GuiBitmapButtonWithFilledBorder::doDisplayInteriorEnabled( abs );
+    GuiBitmapButtonWithFilledBorder::doDisplayInteriorEnabled( abs );
 
-	static GuiBitmap numbers[10] = { Gui::bitmap( SysPathName( "gui/navigate/numtop0.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop1.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop2.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop3.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop4.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop5.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop6.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop7.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop8.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numtop9.bmp" ) ) };
+    static GuiBitmap numbers[ 10 ] = { Gui::bitmap( SysPathName( "gui/navigate/numtop0_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop1_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop2_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop3_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop4_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop5_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop6_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop7_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop8_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numtop9_2x.png" ) ) };
 
-	Gui::Coord absCopy( abs );
-	absCopy.y( absCopy.y() + 20 ); //TODO : remove hard coded values
-	absCopy.x( absCopy.x() + 20 );
+    Gui::Coord absCopy( abs );
+    absCopy.y( absCopy.y() + 20 * MachGui::uiScaleFactor() ); //TODO : remove hard coded values
+    absCopy.x( absCopy.x() + 20 * MachGui::uiScaleFactor() );
 
-	MachGui::drawNumber( numbers, currentValue_, &absCopy );
+    MachGui::drawNumber( numbers, currentValue_, &absCopy );
 }
 
 MachMachinesIcon::MachMachinesIcon( GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-: 	MachGuiIconWithCounter( pParent, rel, SysPathName("gui/navigate/red/machines.bmp"), pInGameScreen ),
-	forcingUp_( false )
+    : MachGuiIconWithCounter( pParent, rel, SysPathName( "gui/navigate/red/machines_2x.png" ), pInGameScreen )
+    , forcingUp_( false )
 {
 	popupButton( false );
 }
@@ -138,9 +138,11 @@ void MachMachinesIcon::doHandleMouseExitEvent( const GuiMouseEvent& mouseEvent )
 	GuiBitmapButtonWithFilledBorder::doHandleMouseExitEvent( mouseEvent );
 }
 
-MachConstructionsIcon::MachConstructionsIcon( GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-: 	MachGuiIconWithCounter( pParent, rel, SysPathName("gui/navigate/red/construc.bmp"), pInGameScreen ),
-	forcingUp_( false )
+MachConstructionsIcon::MachConstructionsIcon( GuiDisplayable* pParent,
+                                              const Gui::Coord& rel,
+                                              MachInGameScreen* pInGameScreen )
+    : MachGuiIconWithCounter( pParent, rel, SysPathName( "gui/navigate/red/construc_2x.png" ), pInGameScreen )
+    , forcingUp_( false )
 {
 	popupButton( false );
 }
@@ -214,8 +216,8 @@ void MachConstructionsIcon::doHandleMouseExitEvent( const GuiMouseEvent& mouseEv
 /* //////////////////////////////////////////////////////////////// */
 
 MachSquadronIcon::MachSquadronIcon( GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-: MachGuiIconWithCounter( pParent, rel, SysPathName("gui/navigate/red/squads.bmp"), pInGameScreen ),
-  pInGameScreen_( pInGameScreen )
+    : MachGuiIconWithCounter( pParent, rel, getRootDirectory() + "squads_2x.png", pInGameScreen )
+    , pInGameScreen_( pInGameScreen )
 {
 	// Intentionally Empty
 }
@@ -310,23 +312,23 @@ string MachGuiIconWithCounter::getRootDirectory() const
 
 void MachConstructionsIcon::loadGame()
 {
-	bitmap( Gui::bitmap( getRootDirectory() + "construc.bmp" ) );
+    bitmap( Gui::bitmap( getRootDirectory() + "construc_2x.png" ) );
 
-	refresh();
+    refresh();
 }
 
 void MachMachinesIcon::loadGame()
 {
-	bitmap( Gui::bitmap( getRootDirectory() + "machines.bmp" ) );
+    bitmap( Gui::bitmap( getRootDirectory() + "machines_2x.png" ) );
 
-	refresh();
+    refresh();
 }
 
 void MachSquadronIcon::loadGame()
 {
-	bitmap( Gui::bitmap( getRootDirectory() + "squads.bmp" ) );
+    bitmap( Gui::bitmap( getRootDirectory() + "squads_2x.png" ) );
 
-	update();
+    update();
 }
 
 /* End GUICTRL.CPP **************************************************/

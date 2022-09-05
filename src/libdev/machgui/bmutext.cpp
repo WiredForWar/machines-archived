@@ -49,19 +49,19 @@ void MachGuiBmuText::refresh()
 //virtual
 void MachGuiBmuText::doDisplay()
 {
-	static GuiBitmap numbers[10] = { Gui::bitmap( SysPathName( "gui/navigate/numbmu0.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu1.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu2.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu3.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu4.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu5.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu6.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu7.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu8.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/navigate/numbmu9.bmp" ) ) };
-	static GuiBitmap slash( Gui::bitmap( SysPathName( "gui/navigate/numbmus.bmp" ) ) );
+    static GuiBitmap numbers[ 10 ] = { Gui::bitmap( SysPathName( "gui/navigate/numbmu0_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu1_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu2_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu3_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu4_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu5_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu6_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu7_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu8_2x.png" ) ),
+                                       Gui::bitmap( SysPathName( "gui/navigate/numbmu9_2x.png" ) ) };
+    static GuiBitmap slash( Gui::bitmap( SysPathName( "gui/navigate/numbmus_2x.png" ) ) );
 
-	Gui::Coord absCopy( absoluteBoundary().minCorner().x() + width(), absoluteBoundary().minCorner().y() );
+    Gui::Coord absCopy( absoluteBoundary().minCorner().x() + width(), absoluteBoundary().minCorner().y() );
 
 	for ( size_t loop = 0; loop < 2; ++loop )
 	{

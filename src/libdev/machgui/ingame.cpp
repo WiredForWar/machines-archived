@@ -196,8 +196,13 @@ MachInGameScreen::MachInGameScreen( W4dSceneManager* pSceneManager, W4dRoot* pRo
 
 	std::cerr << "pContinentMap_->maxCorner().x()" << x << std::endl;
 
-	pBmuButton_ = _NEW( MachGuiBmuButton( pMapArea_, Gui::Coord( x, 0 ), SysPathName( "gui/navigate/bmus.bmp" ), pContinentMap_->bmuText(), pContinentMap_, this ) );
-	pMachinesIcon_ = _NEW( MachMachinesIcon( pMapArea_, Gui::Coord( x, pBmuButton_->absoluteBoundary().maxCorner().y() - 1 ), this ) );
+    pBmuButton_ = _NEW( MachGuiBmuButton( pMapArea_,
+                                          Gui::Coord( x, 0 ),
+                                          SysPathName( "gui/navigate/bmus_2x.png" ),
+                                          pContinentMap_->bmuText(),
+                                          pContinentMap_,
+                                          this ) );
+    pMachinesIcon_ = _NEW( MachMachinesIcon( pMapArea_, Gui::Coord( x, pBmuButton_->absoluteBoundary().maxCorner().y() - 1 ), this ) );
 	pConstructionsIcon_ = _NEW( MachConstructionsIcon( pMapArea_, Gui::Coord( x, pMachinesIcon_->absoluteBoundary().maxCorner().y() - 1 ), this ) );
 	pSquadronIcon_ = _NEW( MachSquadronIcon( pMapArea_, Gui::Coord( x, pConstructionsIcon_->absoluteBoundary().maxCorner().y() - 1 ), this ) );
 	pBmuButton_->setLayer( GuiDisplayable::LAYER2 );

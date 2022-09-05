@@ -23,18 +23,19 @@ class MachGuiCameraToggleBtn : public GuiBitmapButtonWithFilledBorder
 // cannonical from revoked
 {
 public:
-	MachGuiCameraToggleBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:  	GuiBitmapButtonWithFilledBorder(pParent, 
-										rel, 
-										GuiBorderMetrics(1,1,1), 
-										GuiFilledBorderColours( Gui::Colour(144.0/255.0,148.0/255.0,160.0/255.0), 
-																Gui::Colour(232.0/255.0,232.0/255.0,232.0/255.0), 
-															   	Gui::Colour(62.0/255.0,62.0/255.0,62.0/255.0),
-															    Gui::RED() ),
-										Gui::bitmap( SysPathName( "gui/misc/zenith.bmp" ) ), 
-										Gui::Coord(1,1) ),
-		pInGameScreen_( pInGameScreen )
-	{}
+    MachGuiCameraToggleBtn( GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
+        : GuiBitmapButtonWithFilledBorder(
+            pParent,
+            rel,
+            GuiBorderMetrics( 1, 1, 1 ),
+            GuiFilledBorderColours( Gui::Colour( 144.0 / 255.0, 148.0 / 255.0, 160.0 / 255.0 ),
+                                    Gui::Colour( 232.0 / 255.0, 232.0 / 255.0, 232.0 / 255.0 ),
+                                    Gui::Colour( 62.0 / 255.0, 62.0 / 255.0, 62.0 / 255.0 ),
+                                    Gui::RED() ),
+            Gui::bitmap( SysPathName( "gui/misc/zenith_2x.png" ) ),
+            Gui::Coord( 1, 1 ) )
+        , pInGameScreen_( pInGameScreen )
+    {}
 
 protected:
 	// inherited from GuiIcon...
@@ -64,17 +65,17 @@ protected:
 	}
 
 	virtual const GuiBitmap& getBitmap() const
-	{
-		static GuiBitmap zenithBmp = Gui::bitmap( "gui/misc/zenith.bmp" );
-		static GuiBitmap groundBmp = Gui::bitmap( "gui/misc/ground.bmp" );
-		
-		if ( pInGameScreen_->cameras()->isZenithCameraActive() )
-			return groundBmp;
+    {
+        static GuiBitmap zenithBmp = Gui::bitmap( "gui/misc/zenith_2x.png" );
+        static GuiBitmap groundBmp = Gui::bitmap( "gui/misc/ground_2x.png" );
+
+        if ( pInGameScreen_->cameras()->isZenithCameraActive() )
+            return groundBmp;
 
 		return zenithBmp;
-	}
+    }
 
-	virtual void doHandleMouseExitEvent( const GuiMouseEvent& rel )
+    virtual void doHandleMouseExitEvent( const GuiMouseEvent& rel )
 	{
 		GuiBitmapButtonWithFilledBorder::doHandleMouseExitEvent( rel ); 
 
@@ -259,8 +260,12 @@ MachGuiControlPanelAddOn::MachGuiControlPanelAddOn( GuiDisplayable* pParent,
 
     pInGameScreen_ = pInGameScreen;
 
-    _NEW( MachGuiReturnToMenuBtn( this, Gui::Coord( 4, 0 ) * MachGui::uiScaleFactor(), pInGameScreen ) );
-    _NEW( MachGuiCameraToggleBtn( this, Gui::Coord( 4, 22 ) * MachGui::uiScaleFactor(), pInGameScreen ) );
+    // 30 => 60
+    // 16 => 32
+    //
+    _NEW( MachGuiReturnToMenuBtn( this, Gui::Coord( 4 * MachGui::uiScaleFactor(), 1 ), pInGameScreen ) );
+    _NEW( MachGuiCameraToggleBtn(
+        this, Gui::Coord( 5 * MachGui::uiScaleFactor(), 22 * MachGui::uiScaleFactor() ), pInGameScreen ) );
 
     redrawEveryFrame( true );
 

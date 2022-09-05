@@ -50,7 +50,9 @@ public:
 	void loadGame();
 
 protected:
-	// inherited from GuiIcon...
+    SysPathName getBitmapPath() const;
+
+    // inherited from GuiIcon...
 	virtual void doBeDepressed( const GuiMouseEvent& rel );
 	virtual void doBeReleased( const GuiMouseEvent& rel );
 	virtual void doHandleMouseEnterEvent( const GuiMouseEvent& );
