@@ -3,6 +3,7 @@
 #include "gui/border.hpp"
 #include "gui/painter.hpp"
 #include "gui/RootSharedBitmaps.hpp"
+#include "system/pathname.hpp"
 
 using ::testing::An;
 using ::testing::TypedEq;
@@ -38,6 +39,9 @@ TEST(GuiRootSharedBitmapsTests, NamedBitmap_GetNamedBitmap_RefCount)
     MockPainter mockPainter;
 
     auto sharedBitmaps = GuiRootSharedBitmaps{ mockPainter };
+
+    const bool testFileExists = SysPathName::existsAsFile(testFilePath);
+    ASSERT_TRUE(testFileExists);
 
     sharedBitmaps.createUpdateNamedBitmap("backdrop", testFilePath);
 
