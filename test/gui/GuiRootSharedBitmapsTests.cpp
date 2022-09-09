@@ -7,6 +7,8 @@
 using ::testing::An;
 using ::testing::TypedEq;
 
+const char testFilePath[] = "gui/menu/acclaim.bmp";
+
 class MockPainter : public IGuiPainter
 {
 public:
@@ -37,14 +39,14 @@ TEST(GuiRootSharedBitmapsTests, NamedBitmap_GetNamedBitmap_RefCount)
 
     auto sharedBitmaps = GuiRootSharedBitmaps{ mockPainter };
 
-    sharedBitmaps.createUpdateNamedBitmap("backdrop", "gui/menu/acclaim.bmp");
+    sharedBitmaps.createUpdateNamedBitmap("backdrop", testFilePath);
 
     {
         auto currentBackdrop = sharedBitmaps.getNamedBitmap("backdrop");
         ASSERT_EQ(2L, currentBackdrop.use_count());
     }
 
-    auto currentBackdrop = sharedBitmaps.getSharedBitmap("gui/menu/acclaim.bmp");
+    auto currentBackdrop = sharedBitmaps.getSharedBitmap(testFilePath);
     ASSERT_EQ(1L, currentBackdrop.use_count());
 }
 
@@ -72,7 +74,7 @@ TEST(GuiRootSharedBitmapsTests, Blitting_blitNamedBitmapFromArea)
         .Times(1);
 
     auto sharedBitmaps = GuiRootSharedBitmaps{ mockPainter };
-    sharedBitmaps.createUpdateNamedBitmap("backdrop", "gui/menu/acclaim.bmp");
+    sharedBitmaps.createUpdateNamedBitmap("backdrop", testFilePath);
 
     auto backdrop = sharedBitmaps.getNamedBitmap("backdrop");
     sharedBitmaps.blitNamedBitmapFromArea(backdrop, srcBox, dstPoint, [](const Gui::Box& src){
@@ -109,7 +111,7 @@ TEST(GuiRootSharedBitmapsTests, Blitting_blitNamedBitmap)
         .Times(1);
 
     auto sharedBitmaps = GuiRootSharedBitmaps{ mockPainter };
-    sharedBitmaps.createUpdateNamedBitmap("backdrop", "gui/menu/acclaim.bmp");
+    sharedBitmaps.createUpdateNamedBitmap("backdrop", testFilePath);
 
     auto backdrop = sharedBitmaps.getNamedBitmap("backdrop");
     sharedBitmaps.blitNamedBitmap(backdrop, dstPoint);
