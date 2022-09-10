@@ -8,7 +8,7 @@
 using ::testing::An;
 using ::testing::TypedEq;
 
-const char testFilePath[] = "gui/menu/acclaim.bmp";
+const char testFilePath[] = "gui/fstpersn/command/widget.bmp";
 
 class MockPainter : public IGuiPainter
 {
