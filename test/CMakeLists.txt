@@ -70,5 +70,7 @@ foreach( val RANGE ${len2} )
         libaudio
         ${MACHINES_LIBS}
     )
-    add_test(NAME ${test_name} COMMAND ${test_name})
+    add_test(NAME ${test_name} COMMAND ${test_name}
+        WORKING_DIRECTORY ${machines_SOURCE_DIR}
+    )
 endforeach()
