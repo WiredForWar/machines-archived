@@ -356,7 +356,7 @@ bool SDLApp::clientStartup()
 	manager_ = _NEW(W4dSceneManager(pDisplay_, root));
     manager_->pDevice()->debugTextCoords(204, 0);
     manager_->useLevelOfDetail(
-        !SysRegistry::instance().queryIntegerValue("Options\\Graphics Complexity\\LOD", "Value", 1));
+        !SysRegistry::instance().queryIntegerValue("Options\\Graphics Complexity\\LOD", "Value"));
 
     // set this after the device has been created: we need the capability class
     // to find out how much memory is available for display
