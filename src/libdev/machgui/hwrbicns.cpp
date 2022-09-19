@@ -86,7 +86,7 @@ void MachHWResearchBankIcons::updateIcons()
     {
         MachLogResearchItem* pResearchItem = (*it);
         MachHWResearchBankIcon* pIcon = new MachHWResearchBankIcon(this, pInGameScreen_, pResearchItem, race);
-        pIcon->setMouseClickHandler([this](GuiButton* pButton) { onIconClicked(pButton); });
+        pIcon->setReleasedHandler([this](GuiButton* pButton) { onIconClicked(pButton); });
     }
 
     //Ensure redisplayed

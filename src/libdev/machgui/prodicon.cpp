@@ -183,8 +183,9 @@ void MachProductionIcon::doBeReleased( const GuiMouseEvent& )
 //static
 size_t MachProductionIcon::buttonHeight()
 {
-	// TODO : Remove hard coded values
-	return MachGuiBuildProgressBar::height() + (38 /* Bitmap height */ + 4 /* Border */) * MachGui::uiScaleFactor();
+    // TODO : Remove hard coded values
+    return MachGuiBuildProgressBar::height()
+           + (38 /* Bitmap height */ + 4 /* Border */); //  * MachGui::uiScaleFactor();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,7 +193,7 @@ size_t MachProductionIcon::buttonHeight()
 //static
 size_t MachProductionIcon::buttonWidth()
 {
-	return 42 * MachGui::uiScaleFactor(); // TODO : Remove hard coded value
+    return 42; //  * MachGui::uiScaleFactor(); // TODO : Remove hard coded value
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

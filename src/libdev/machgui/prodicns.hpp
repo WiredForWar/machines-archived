@@ -38,8 +38,9 @@ public:
 
 	static size_t height();
 	static size_t width();
+    size_t maxContentWidth() const;
 
-	void updateProgress( float percentageComplete );
+    void updateProgress( float percentageComplete );
 
     void CLASS_INVARIANT;
 

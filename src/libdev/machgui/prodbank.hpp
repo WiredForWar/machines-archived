@@ -74,7 +74,6 @@ public:
     virtual void domainDeleted( W4dDomain* pDomain );
 
     ////////////////////////////////////////////////////////////////////////////////
-	static size_t width();
 	static size_t height();
 
     void CLASS_INVARIANT;

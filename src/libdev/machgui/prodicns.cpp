@@ -16,19 +16,30 @@
 #include "machgui/controlp.hpp"
 #include "machlog/factory.hpp"
 #include "machlog/produnit.hpp"
+#include <iostream>
+#include <ostream>
 
 /* ////////////////////////////////////////////// constructor /////////////////////////////////////////////////// */
 
-MachProductionIcons::MachProductionIcons(	GuiDisplayable * pParent, 
-											const Gui::Box& area, 
-											MachLogFactory* pFactory,
-											MachInGameScreen * pInGameScreen )
-: GuiSimpleScrollableList( 	pParent, area, 
-							MachProductionIcon::buttonWidth(), 
-							MachProductionIcon::buttonHeight(), 1 ),
-  pFactory_( pFactory ),
-  pInGameScreen_( pInGameScreen )
+int GetMaxDivisible(int divisible, int divider)
 {
+    return (divisible / divider) * divider;
+}
+
+MachProductionIcons::MachProductionIcons(GuiDisplayable* pParent,
+                                         const Gui::Box& area,
+                                         MachLogFactory* pFactory,
+                                         MachInGameScreen* pInGameScreen)
+    : GuiSimpleScrollableList(
+        pParent,
+        Gui::Box(area.minCorner(), GetMaxDivisible(area.width(), MachProductionIcon::buttonWidth()), area.height()),
+        MachProductionIcon::buttonWidth(),
+        MachProductionIcon::buttonHeight(),
+        1)
+    , pFactory_(pFactory)
+    , pInGameScreen_(pInGameScreen)
+{
+    std::cerr << "MachProductionIcons area: " << area << std::endl;
     //Add the icons
     updateIcons();
 
@@ -77,7 +88,7 @@ void MachProductionIcons::updateIcons()
     {
         const MachLogProductionUnit& item = *(*it);
         MachProductionIcon* pIcon = new MachProductionIcon(this, pInGameScreen_, &item, index++);
-        pIcon->setMouseClickHandler([this](GuiButton* pButton) { onIconClicked(pButton); });
+        pIcon->setReleasedHandler([this](GuiButton* pButton) { onIconClicked(pButton); });
     }
 
     // Ensure redisplayed
@@ -105,7 +116,31 @@ size_t MachProductionIcons::height()
 //static 
 size_t MachProductionIcons::width()
 {
-	return ( 3 * MachProductionIcon::buttonWidth() );	
+    return (3 * MachProductionIcon::buttonWidth());
+}
+
+size_t MachProductionIcons::maxContentWidth() const
+{
+    int w = GuiSimpleScrollableList::width();
+    std::cerr << "maxContentWidth: " << w << " bw: " << MachProductionIcon::buttonWidth() << std::endl;
+
+    // MachProductionBank area: 2D box:   (1,770) to   (338,822) size 337x52
+
+    // MachProductionIcons area: 2D box:   (17,0) to   (303,52) size 286x52
+
+    // area width 337
+    // left button 17
+    // right button 17
+    // total for icons: 303
+    // corrected 303 to 294
+
+    // maxContentWidth: 286 bw: 42
+    // -34
+    // cw = 252
+
+    return (w / MachProductionIcon::buttonWidth()) * MachProductionIcon::buttonWidth();
+
+    // return GuiSimpleScrollableList::width() - GuiSimpleScrollableList::width() % MachProductionIcon::buttonWidth();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

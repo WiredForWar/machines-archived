@@ -32,10 +32,15 @@ MachProductionBank::MachProductionBank
     observingFactory_( false )
 {
 
+    std::cerr << "MachProductionBank area: " << relativeBoundary << std::endl;
+    std::cerr << "MachProductionBank GuiDisplayable::width(): " << GuiDisplayable::width() << std::endl;
+    std::cerr << "MachProductionBank width: " << GuiDisplayable::width() << std::endl;
+
     //Construct the icon sequence depicting the queue
-    Gui::Box iconsArea( MachGuiBufferScrollButton::width(), 0, 
-    					MachProductionIcons::width() + MachGuiBufferScrollButton::width(),
-	                    MachProductionIcons::height() );
+    Gui::Box iconsArea(MachGuiBufferScrollButton::width(),
+                       0,
+                       GuiDisplayable::width() - MachGuiBufferScrollButton::width(),
+                       GuiDisplayable::height());
 
     pIcons_ = _NEW( MachProductionIcons( this, iconsArea, pFactory, pInGameScreen ) );
 
@@ -46,10 +51,21 @@ MachProductionBank::MachProductionBank
     //Create and display a build progress indicator if required
     updateProgress();
 
-	pScrollLeft_ = _NEW( MachGuiBufferScrollButton( this, Gui::Coord(0,0), SysPathName( "gui/misc/scrolll.bmp" ), pIcons_, MachGuiBufferScrollButton::LEFT, pInGameScreen ) );
-	pScrollRight_ = _NEW( MachGuiBufferScrollButton( this, Gui::Coord(MachGuiBufferScrollButton::width() + MachProductionIcons::width(),0), SysPathName( "gui/misc/scrollr.bmp" ), pIcons_, MachGuiBufferScrollButton::RIGHT, pInGameScreen ) );
+    pScrollLeft_ = _NEW(MachGuiBufferScrollButton(this,
+                                                  Gui::Coord(0, 0),
+                                                  SysPathName("gui/misc/scrolll.bmp"),
+                                                  pIcons_,
+                                                  MachGuiBufferScrollButton::LEFT,
+                                                  pInGameScreen));
+    pScrollRight_ =
+        _NEW(MachGuiBufferScrollButton(this,
+                                       Gui::Coord(MachGuiBufferScrollButton::width() + pIcons_->maxContentWidth(), 0),
+                                       SysPathName("gui/misc/scrollr.bmp"),
+                                       pIcons_,
+                                       MachGuiBufferScrollButton::RIGHT,
+                                       pInGameScreen));
 
-	updateQueueIcons();
+    updateQueueIcons();
 
     TEST_INVARIANT;
 }
@@ -128,14 +144,6 @@ MachLogFactory& MachProductionBank::factory()
 void MachProductionBank::domainDeleted( W4dDomain* )
 {
     //Do nothing
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//static 
-size_t MachProductionBank::width()
-{
-	return ( MachGuiBufferScrollButton::width() + MachProductionIcons::width() + MachGuiBufferScrollButton::width() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
