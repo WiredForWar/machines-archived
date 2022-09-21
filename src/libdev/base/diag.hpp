@@ -97,8 +97,7 @@
 #define BOB_STREAM_ENABLE               DEBUG_STREAM_ENABLE( DIAG_BOB )
 #define BOB_STREAM_DISABLE              DEBUG_STREAM_DISABLE( DIAG_BOB )
 
-//#define	HAL_STREAM( exp )               DEBUG_STREAM( DIAG_HAL, exp )
-#define	HAL_STREAM( exp )               std::cerr << exp
+#define	HAL_STREAM( exp )               DEBUG_STREAM( DIAG_HAL, exp )
 #define	HAL_WHERE                       HAL_STREAM( WHERE_STR << std::endl )
 #define HAL_INSPECT( var )              HAL_STREAM( #var " :\t" << (var) << std::endl )
 #define HAL_INDENT( nSpaces )           DEBUG_INDENT( DIAG_HAL, nSpaces )
