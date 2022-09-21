@@ -285,9 +285,9 @@ void MachContinentMap::loadGame( const string& planet )
 {
 	string mapPath = "models/planet/";
 	mapPath += planet;
-	string mapBmp = mapPath + "/map.png";
+    string mapBmp = mapPath + "/map.bmp";
 
-	ASSERT_FILE_EXISTS( mapBmp.c_str() );
+    ASSERT_FILE_EXISTS( mapBmp.c_str() );
 
 	// Store map directory.
 	mapDir_ = mapBmp;
