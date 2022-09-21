@@ -33,7 +33,9 @@ public:
 	virtual void doHandleMouseClickEvent( const GuiMouseEvent& rel );
 	virtual void doHandleMouseExitEvent( const GuiMouseEvent& rel );
 
-    void setMouseClickHandler(Callback callback);
+    void setReleasedHandler(Callback callback);
+    void setMouseEnterHandler(Callback callback);
+    void setMouseExitHandler(Callback callback);
 
 protected:
 	
@@ -63,11 +65,13 @@ private:
 	GuiButton& operator =( const GuiButton& );
 	bool operator ==( const GuiButton& ) const;
 
-    std::function<void(GuiButton*)> clickedCallback_;
+    std::function<void(GuiButton*)> releasedCallback_;
+    std::function<void(GuiButton*)> mouseEnterCallback_;
+    std::function<void(GuiButton*)> mouseExitCallback_;
 
-	bool	isDepressed_;
-	bool	isDisabled_;
-	bool	isPopupButton_;
+    bool isDepressed_;
+    bool isDisabled_;
+    bool isPopupButton_;
 };
 
 //////////////////////////////////////////////////////////////////////

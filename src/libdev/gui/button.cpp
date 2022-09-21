@@ -70,9 +70,9 @@ void GuiButton::doHandleMouseClickEvent( const GuiMouseEvent& e )
 				}
 			}
 
-            if (clickedCallback_)
+            if (releasedCallback_)
             {
-                clickedCallback_(this);
+                releasedCallback_(this);
             }
 		}
 		else if( e.leftButton() == Gui::PRESSED )
@@ -99,14 +99,29 @@ void GuiButton::doHandleMouseExitEvent( const GuiMouseEvent& )
 		if( isDepressed_ and isPopupButton_ )
 		{
 			isDepressed_ = false;
-			changed();
-		}
-	}
+            changed();
+        }
+
+        if (mouseExitCallback_)
+        {
+            mouseExitCallback_(this);
+        }
+    }
 }
 
-void GuiButton::setMouseClickHandler(Callback callback)
+void GuiButton::setReleasedHandler(Callback callback)
 {
-    clickedCallback_ = callback;
+    releasedCallback_ = callback;
+}
+
+void GuiButton::setMouseEnterHandler(Callback callback)
+{
+    mouseEnterCallback_ = callback;
+}
+
+void GuiButton::setMouseExitHandler(Callback callback)
+{
+    mouseExitCallback_ = callback;
 }
 
 void GuiButton::doDisplay()
