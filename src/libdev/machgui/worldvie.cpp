@@ -39,6 +39,7 @@
 #include "render/camera.hpp"
 #include "sim/manager.hpp"
 
+#include <iostream>
 #include <utility>
 
 MachWorldViewWindow::MachWorldViewWindow( 	MachInGameScreen * pParent,
@@ -83,14 +84,20 @@ void MachWorldViewWindow::doHandleMouseClickEvent( const GuiMouseEvent& event )
     if( mouseButtonPressed_)
     {
         //get the 3d line
-		Gui::Coord absCoord( event.coord() );
-		absCoord += absoluteBoundary().minCorner();
-		startRubberBand_ = absCoord;
+        Gui::Coord absCoord(event.coord());
+        absCoord += absoluteBoundary().minCorner();
+        startRubberBand_ = absCoord;
 
-		// Store camera used at beginning of rubber banding operation
-		if ( pCameras_->isZenithCameraActive() )
-			rubberBandCamera_ = ZENITH;
-		else if ( pCameras_->isGroundCameraActive() )
+        std::cerr << "MouseClickEvent(): start:" << startRubberBand_ << std::endl;
+
+        const auto dp = DevMouse::instance().position();
+
+        std::cerr << "update(): device pos:" << dp.first << "x" << dp.second << std::endl;
+
+        // Store camera used at beginning of rubber banding operation
+        if (pCameras_->isZenithCameraActive())
+            rubberBandCamera_ = ZENITH;
+        else if ( pCameras_->isGroundCameraActive() )
 			rubberBandCamera_ = GROUND;
 		else
 			rubberBandCamera_ = INVALID;
@@ -466,25 +473,34 @@ void MachWorldViewWindow::update()
 				W4dSceneManager& sceneManager = pInGameScreen_->sceneManager();
 			    const MexTransform3d& cameraTransform = sceneManager.currentCamera()->globalTransform();
 				MexPoint3d posIn3DWorld = startRubberBand3DPos_;
-				cameraTransform.transformInverse( &posIn3DWorld );
-				startRubberBand_ = RenDevice::current()->cameraToScreen( posIn3DWorld );
+                cameraTransform.transformInverse(&posIn3DWorld);
+                startRubberBand_ = RenDevice::current()->cameraToScreen(posIn3DWorld);
 
-				// Reset the viewport correctly for GUI drawing.  TBD: a save/restore or
-				// push/pop idiom would be much more robust.
-				pInGameScreen_->setGuiViewport();
-			}
+                std::cerr << "update(): rewrite start to:" << startRubberBand_ << std::endl;
+
+                // Reset the viewport correctly for GUI drawing.  TBD: a save/restore or
+                // push/pop idiom would be much more robust.
+                pInGameScreen_->setGuiViewport();
+            }
 
 			endRubberBand_.x( DevMouse::instance().position().first );
 			endRubberBand_.y( DevMouse::instance().position().second );
+            const auto dp = DevMouse::instance().position();
 
-			if ( not rubberBanding_ )
-			{
+            std::cerr << "update(): device pos:" << dp.first << "x" << dp.second << std::endl;
+
+            if (not rubberBanding_)
+            {
 				// Check that start and end points are far enough apart to start rubber banding.
 				// Note : used MexLine3d because there doesn't appear to be a "length" function
 				// for MexLine2d.
 				MexLine3d line( MexPoint3d( startRubberBand_.x(), startRubberBand_.y(), 0 ),
 								MexPoint3d( endRubberBand_.x(), endRubberBand_.y(), 0 ) );
-				if ( line.length() > 10 )
+
+                std::cerr << "update(): start:" << startRubberBand_ << " end: " << endRubberBand_
+                          << " length: " << line.length() << std::endl;
+
+                if ( line.length() > 10 )
 				{
 					rubberBanding_ = true;
 					if ( rubberBandCamera_ == GROUND )
