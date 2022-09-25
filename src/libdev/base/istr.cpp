@@ -13,10 +13,11 @@
 #include "base/internal/istrbuff.hpp"
 #include "base/internal/istrimpl.hpp"
 
-PerIstream::PerIstream(istream& istr)
-    : istream(istr.rdbuf())
-    , pImpl_(_NEW(PerIstreamImpl(this)))
-    , istr_(istr)
+PerIstream::PerIstream( istream& istr )
+: pImpl_( _NEW( PerIstreamImpl( this ) ) ),
+  istr_( istr )
+  //istream( istr )
+   //istream( pImpl_->pBuffer_ )
 {
     istream& base = *this;
 
@@ -28,10 +29,9 @@ PerIstream::PerIstream(istream& istr)
     Persistence::instance().registerOpenIstream();
 }
 
-PerIstream::PerIstream(istream& istr, PerIstreamReporter* pReporter)
-    : istream(istr.rdbuf())
-    , pImpl_(_NEW(PerIstreamImpl(this, istr, pReporter)))
-    , istr_(istr)
+PerIstream::PerIstream( istream& istr, PerIstreamReporter* pReporter )
+: pImpl_( _NEW( PerIstreamImpl( this, istr, pReporter ) ) ),
+  istr_( istr )
 {
     PRE( pReporter != NULL );
 
