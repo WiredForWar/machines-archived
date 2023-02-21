@@ -72,6 +72,8 @@ public:
     static MATHEX_SCALAR uiScaleFactor();
     static void setUiScaleFactor(MATHEX_SCALAR scale);
 
+    static std::string getScaledImagePath(const char* pBasePath);
+
 	// Various gui layout values
 	static int controlPanelInXPos();
 	static int controlPanelOutXPos();

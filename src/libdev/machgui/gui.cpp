@@ -18,6 +18,7 @@
 #include "machlog/canattac.hpp"
 #include "machlog/machine.hpp"
 #include <cassert>
+#include <string>
 
 //static
 GuiBitmap MachGui::createIconForMachine(MachLogMachine* machine, bool firstPersonIcon)
@@ -662,6 +663,19 @@ MATHEX_SCALAR MachGui::uiScaleFactor()
 void MachGui::setUiScaleFactor(MATHEX_SCALAR scale)
 {
     s_uiScaleFactor = scale;
+}
+
+std::string MachGui::getScaledImagePath(const char* pBasePath)
+{
+    std::string path = pBasePath;
+    const MATHEX_SCALAR factor = uiScaleFactor();
+    if (factor == 1)
+    {
+        return path + ".bmp";
+    }
+
+    // TODO: Fix later :eyes:
+    return path + "_2x.png";
 }
 
 //static
