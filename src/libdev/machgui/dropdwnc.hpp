@@ -27,8 +27,20 @@ class MachGuiDropDownListBoxCreator	: public GuiDisplayable, public MachGuiFocus
 // Canonical form revoked
 {
 public:
-	typedef void* DropDownListBoxItem;
+	typedef const void* DropDownListBoxItem;
 	typedef ctl_vector< DropDownListBoxItem > DropDownListBoxItems;
+
+    template <typename T, int Size>
+    static DropDownListBoxItems createBoxItems(T (&Values)[Size])
+    {
+        MachGuiDropDownListBoxCreator::DropDownListBoxItems items;
+        items.reserve(Size);
+        for (const T& Value : Values)
+        {
+            items.push_back(&Value);
+        }
+        return items;
+    };
 
     //TODO: Eliminate entirely MachGuiStartupScreens from these constructors. Focus capable control stuff is what MGSS still needed for
     MachGuiDropDownListBoxCreator( GuiDisplayable* pParent, MachGuiStartupScreens*, int width, const GuiStrings& availText );
@@ -44,10 +56,14 @@ public:
 	
 	// Get ptr to item associated with currently highlighted text
 	const DropDownListBoxItem item() const;
-	// PRE ( items() )
+	// PRE ( hasItems() )
+
+	bool setCurrentItem(const DropDownListBoxItem item);
 
 	// Establish if there are values associated with drop down list box entries
-	bool items() const;
+	bool hasItems() const;
+
+	const DropDownListBoxItems& items() const;
 
 	// Set item data associated with list box item text
 	void items( const DropDownListBoxItems& items );
