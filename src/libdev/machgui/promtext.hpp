@@ -68,6 +68,7 @@ protected:
 	virtual bool doHandleCharEvent( const GuiCharEvent& event );
 
 	void displayChatMessage();
+	void displayPromptText( PromptDisplayed textType, const ctl_vector<string> & textLines );
 
 	virtual int maxWidth() const;
 
