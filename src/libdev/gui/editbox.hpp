@@ -22,7 +22,7 @@ class GuiSingleLineEditBox : public GuiDisplayable
 // Canonical form revoked
 {
 public:
-    GuiSingleLineEditBox( GuiDisplayable* pParent, const Gui::Box& box, const GuiBmpFont& font );
+    GuiSingleLineEditBox(GuiDisplayable* pParent, const Gui::Box& box, const GuiBmpFont& font = GuiBmpFont());
     ~GuiSingleLineEditBox();
 
 	 // Sets the maximum number of characters that can be typed into the edit box.
@@ -73,7 +73,7 @@ protected:
 
 	virtual int maxWidth() const;
 
-private:
+protected:
     friend ostream& operator <<( ostream& o, const GuiSingleLineEditBox& t );
 
     GuiSingleLineEditBox( const GuiSingleLineEditBox& );

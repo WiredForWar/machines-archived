@@ -88,7 +88,11 @@ bool checkEnteredText( const unsigned char* pEncryptedText, const unsigned char*
 class MachPromptTextImpl
 {
 public:
-	MachPromptTextImpl();
+    MachPromptTextImpl(const std::string& normalFont,
+                       const std::string& shadowFont,
+                       GuiBmpFont::FontType fontType,
+                       size_t spaceCharWidth,
+                       size_t spacing);
 
 	GuiBitmap promptBmp_;
     string cursorPromptText_; //The prompt displayed for mouse moves
@@ -116,9 +120,13 @@ public:
 	MachInGameScreen* pInGameScreen_;
 };
 
-MachPromptTextImpl::MachPromptTextImpl()
-:	font_( GuiBmpFont::getFont( "gui/menu/promtfnt.bmp" ) ),
-	shadowFont_( GuiBmpFont::getFont( "gui/menu/promdfnt.bmp" ) ),
+MachPromptTextImpl::MachPromptTextImpl(const std::string& normalFont,
+                                       const std::string& shadowFont,
+                                       GuiBmpFont::FontType fontType,
+                                       size_t spaceCharWidth,
+                                       size_t spacing)
+    : font_(GuiBmpFont::getFont(normalFont, fontType, spaceCharWidth, spacing))
+    , shadowFont_(GuiBmpFont::getFont(shadowFont, fontType, spaceCharWidth, spacing))
 	refresh_( true ),
 	lightOn_( Gui::bitmap( "gui/misc/tplight2.bmp" ) ),
 	lightOff_( Gui::bitmap( "gui/misc/tplight1.bmp" ) ),
@@ -133,10 +141,20 @@ MachPromptTextImpl::MachPromptTextImpl()
 	lightOff_.enableColourKeying();
 }
 
-MachPromptText::MachPromptText( MachInGameScreen* pParent, const Gui::Boundary& relativeBoundary, MachCameras* pCameras, GuiDisplayable* pPassEventsTo )
-: 	GuiSingleLineEditBox( pParent, relativeBoundary, GuiBmpFont::getFont( "gui/menu/promtfnt.bmp" ) )
+MachPromptText::MachPromptText(MachInGameScreen* pParent,
+                               const Gui::Boundary& relativeBoundary,
+                               MachCameras* pCameras,
+                               GuiDisplayable* pPassEventsTo)
+    : GuiSingleLineEditBox(pParent, relativeBoundary)
 {
-	pImpl_ = _NEW( MachPromptTextImpl() );
+    std::string normalFont = MachGui::getScaledImageName("gui/menu/promtfnt");
+    std::string shadowFont = MachGui::getScaledImageName("gui/menu/promdfnt");
+    GuiBmpFont::FontType fontType = GuiBmpFont::PROPORTIONAL;
+    size_t spaceCharWidth = 7;
+    size_t spacing = 1;
+
+    font_ = GuiBmpFont::getFont(normalFont, fontType, spaceCharWidth, spacing);
+    pImpl_ = _NEW(MachPromptTextImpl(normalFont, shadowFont, fontType, spaceCharWidth, spacing));
 
 	CB_DEPIMPL( GuiBitmap, promptBmp_ );
 	CB_DEPIMPL( MachCameras*, pCameras_ );
