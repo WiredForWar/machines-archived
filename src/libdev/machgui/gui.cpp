@@ -711,7 +711,7 @@ int MachGui::promptTextXOffset()
 //static
 int MachGui::promptTextYOffset()
 {
-	return -24;
+    return -24 * uiScaleFactor();
 }
 
 //static
