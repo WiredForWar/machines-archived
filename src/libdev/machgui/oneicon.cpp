@@ -145,11 +145,11 @@ public:
 		if ( pMachine_ )
 		{
 			switch ( pMachine_->race() )
-			{
-				case MachPhys::RED:
-					bitmap( Gui::bitmap( "gui/misc/red/inhead.bmp" ) );
-					break;
-				case MachPhys::GREEN:
+            {
+                case MachPhys::RED:
+                    bitmap(Gui::bitmap(MachGui::getScaledImagePath("gui/misc/red/inhead.bmp")));
+                    break;
+                case MachPhys::GREEN:
 					bitmap( Gui::bitmap( "gui/misc/green/inhead.bmp" ) );
 					break;
 				case MachPhys::BLUE:
@@ -495,8 +495,17 @@ MachGuiCorralSingleIcon::MachGuiCorralSingleIcon( GuiDisplayable* pParent, const
 	pIconInfo_ = _NEW( MachGuiCorralSingleIconInfo( this, Gui::Coord( MachGuiCorralResource::buttonWidth(), 0 ), pInGameScreen_ ) );
 	const char insideBuildingIconFile[] = "gui/misc/contents.bmp";
 	//const char insideBuildingIconFile[] = "gui/misc/contents_2x.png";
-	pSelectInsideBuildingIcon_ = _NEW( MachGuiSelectInsideBuildingIcon( this, Gui::Coord( MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0 ), SysPathNames( SysPathName(insideBuildingIconFile),SysPathName(insideBuildingIconFile) ), pInGameScreen_ ) );
-	pInHeadIcon_ = _NEW( MachGuiInHeadIcon( this, Gui::Coord( MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0 ), SysPathNames( SysPathName("gui/misc/red/inhead.bmp"),SysPathName("gui/misc/red/inhead.bmp") ), pInGameScreen_ ) );
+    pSelectInsideBuildingIcon_ = _NEW(MachGuiSelectInsideBuildingIcon(
+        this,
+        Gui::Coord(MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0),
+        SysPathNames(SysPathName(insideBuildingIconFile), SysPathName(insideBuildingIconFile)),
+        pInGameScreen_));
+    pInHeadIcon_ = _NEW(
+        MachGuiInHeadIcon(this,
+                          Gui::Coord(MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0),
+                          SysPathNames(SysPathName(MachGui::getScaledImagePath("gui/misc/red/inhead.bmp")),
+                                       SysPathName(MachGui::getScaledImagePath("gui/misc/red/inhead.bmp"))),
+                          pInGameScreen_));
 }
 
 //virtual

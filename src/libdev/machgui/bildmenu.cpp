@@ -14,14 +14,14 @@
 #include "world4d/subject.hpp"
 #include "ctl/pvector.hpp"
 
-MachBuildMenu::MachBuildMenu( 	GuiDisplayable* pParent, 
-								MachProductionBank* pProductionBank, 
-								const Gui::Coord& coord,
-								MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( coord, reqWidth(), reqHeight( pInGameScreen, coord ) ) * MachGui::uiScaleFactor(), pInGameScreen ),
-    pInGameScreen_( pInGameScreen ),
-    pProductionBank_( pProductionBank ),
-    pFactory_( &selectedFactory( pInGameScreen ) )
+MachBuildMenu::MachBuildMenu(GuiDisplayable* pParent,
+                             MachProductionBank* pProductionBank,
+                             const Gui::Coord& coord,
+                             MachInGameScreen* pInGameScreen)
+    : MachGuiScrollArea(pParent, Gui::Box(coord, reqWidth(), reqHeight(pInGameScreen, coord)), pInGameScreen)
+    , pInGameScreen_(pInGameScreen)
+    , pProductionBank_(pProductionBank)
+    , pFactory_(&selectedFactory(pInGameScreen))
 {
     TEST_INVARIANT;
 }

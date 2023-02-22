@@ -349,17 +349,15 @@ void MachGuiControlPanel::setupDecalBitmaps()
 {
 	CB_DEPIMPL_ARRAY( GuiBitmap, decals_ );
 
-	// Setup decal bitmaps
-	decals_[0] = Gui::bitmap( getDecalRootDirectory() + "decal1.bmp" );
-	decals_[1] = Gui::bitmap( getDecalRootDirectory() + "decal2.bmp" );
-	decals_[2] = Gui::bitmap( getDecalRootDirectory() + "decal3.bmp" );
-	decals_[3] = Gui::bitmap( getDecalRootDirectory() + "decal4.bmp" );
-	//decals_[4] = Gui::bitmap( "gui/misc/decal5.bmp" );
-	decals_[4] = Gui::bitmap( "gui/misc/decal5_2x.png" );
-	decals_[5] = Gui::bitmap( "gui/misc/decal6.bmp" );
-	decals_[6] = Gui::bitmap( "gui/misc/decal7.bmp" );
-//	decals_[6] = Gui::bitmap( "gui/misc/decal7_x2.png" );
-	decals_[7] = Gui::bitmap( "gui/misc/decal7.bmp" );
+    // Setup decal bitmaps
+    decals_[0] = Gui::bitmap(MachGui::getScaledImagePath(getDecalRootDirectory() + "decal1.bmp"));
+    decals_[1] = Gui::bitmap(MachGui::getScaledImagePath(getDecalRootDirectory() + "decal2.bmp"));
+    decals_[2] = Gui::bitmap(MachGui::getScaledImagePath(getDecalRootDirectory() + "decal3.bmp"));
+    decals_[3] = Gui::bitmap(MachGui::getScaledImagePath(getDecalRootDirectory() + "decal4.bmp"));
+    decals_[4] = Gui::bitmap(MachGui::getScaledImagePath("gui/misc/decal5.bmp"));
+    decals_[5] = Gui::bitmap(MachGui::getScaledImagePath("gui/misc/decal6.bmp"));
+    decals_[6] = Gui::bitmap(MachGui::getScaledImagePath("gui/misc/decal7.bmp"));
+    decals_[7] = Gui::bitmap(MachGui::getScaledImagePath("gui/misc/decal7.bmp"));
 
 	for ( int loop = 0; loop < 8; ++loop )
 	{

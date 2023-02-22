@@ -7,6 +7,8 @@
 
 #include "machgui/actbmpnm.hpp"
 
+#include "machgui/gui.hpp"
+
 #include "base/diag.hpp"
 
 #include "machphys/machphys.hpp"
@@ -145,7 +147,13 @@ string MachActorBitmaps::name( MachLog::ObjectType objectType, int subType, int 
 	appendWeaponCombo( retVal, wc );
 
     std::transform(retVal.begin(), retVal.end(), retVal.begin(), ::tolower);
-	ASSERT_FILE_EXISTS( retVal.c_str() );
+
+    if (!inFirstPerson && race == MachPhys::RED)
+    {
+        retVal = MachGui::getScaledImagePath(retVal);
+    }
+
+    ASSERT_FILE_EXISTS(retVal.c_str());
 
     return retVal;
 }

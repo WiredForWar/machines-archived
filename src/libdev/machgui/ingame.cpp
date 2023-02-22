@@ -1816,11 +1816,9 @@ void MachInGameScreen::currentContext( MachGui::ControlPanelContext newContext, 
 
 				size_t yPos = sciCoord.y() + 2;
 
-                pBuildMenu_ = _NEW( MachBuildMenu( 	pControlPanel_,
-													pProductionBank_,
-                    								Gui::Coord( 1, yPos ),
-                                                   	this ) );
-				pBuildMenu_->initialise();
+                pBuildMenu_ = _NEW(MachBuildMenu(
+                    pControlPanel_, pProductionBank_, Gui::Coord(1, yPos) * MachGui::uiScaleFactor(), this));
+                pBuildMenu_->initialise();
 
 				GuiResourceString promptString( IDS_BUILD_START );
 				commandPromptText( promptString.asString() );
