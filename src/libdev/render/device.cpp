@@ -339,7 +339,7 @@ const GLuint RenDevice::loadShaders(const char* vertexShaderPath, const char* fr
         }
         else
         {
-            std::cerr << "Impossible to open vertex shader file " << std::endl;
+            std::cerr << "Impossible to open vertex shader file from: " << shadersDir << std::endl;
             return 0;
         }
 
@@ -353,7 +353,7 @@ const GLuint RenDevice::loadShaders(const char* vertexShaderPath, const char* fr
         }
         else
         {
-            std::cerr << "Impossible to open fragment shader file " << std::endl;
+            std::cerr << "Impossible to open fragment shader file from: " << shadersDir << std::endl;
             return 0;
         }
     }
