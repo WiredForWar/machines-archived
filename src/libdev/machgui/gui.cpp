@@ -668,16 +668,26 @@ void MachGui::setUiScaleFactor(MATHEX_SCALAR scale)
     s_uiScaleFactor = scale;
 }
 
-std::string MachGui::getScaledImagePath(const char* pBasePath)
+std::string MachGui::getScaledImagePath(std::string path)
 {
-    std::string path = pBasePath;
+    const bool hasBmpExtention = path.size() > 4 && path.substr(path.size() - 4, 4) == ".bmp";
+
     const MATHEX_SCALAR factor = uiScaleFactor();
     if (factor == 1)
     {
+        if (hasBmpExtention)
+            return path;
+
         return path + ".bmp";
     }
 
-    // TODO: Fix later :eyes:
+    if (hasBmpExtention)
+    {
+        const auto from = path.end() - 4;
+        path.replace(from, path.end(), "_2x.png");
+        return path;
+    }
+
     return path + "_2x.png";
 }
 
