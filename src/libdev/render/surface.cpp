@@ -1210,7 +1210,7 @@ void RenSurface::read( PerIstream& inStream )
 			{
 //				colRef = RGB( image[ ( x * 3 ) + 2 ], image[ ( x * 3 ) + 1 ], image[ x * 3 ] );
 //				SetPixel(hdc, x, y, colRef );
-                image[pixel++] = imageLine[x] << 24;
+                image[pixel++] = imageLine[x] & 0x000000FF;
 			}
 		}
         internals()->copyFromBuffer(image);
