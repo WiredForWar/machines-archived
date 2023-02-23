@@ -133,6 +133,7 @@ public:
 	size_t useFontHeight(size_t pixelHieght);
 	size_t currentFontHeight() const;			// defaults to 16.
 	void drawText(int x, int y, const std::string& text, const RenColour& col);
+    void drawText(const MexPoint2d& position, const std::string& text, const RenColour& col);
 	void textDimensions(const std::string& text, Ren::Rect* dimensions) const;
 
 	// Is source colour keying enabled for this image?

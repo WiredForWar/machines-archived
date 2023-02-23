@@ -950,6 +950,11 @@ void RenSurface::drawText(int x, int y, const std::string& text, const RenColour
 	internals()->drawText(x,y, text, col);
 }
 
+void RenSurface::drawText(const MexPoint2d& position, const std::string& text, const RenColour& col)
+{
+    internals()->drawText(position.x(), position.y(), text, col);
+}
+
 void RenSurface::textDimensions(const std::string& text, Ren::Rect* dimensions) const
 {
 	PRE(dimensions);
