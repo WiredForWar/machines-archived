@@ -665,6 +665,7 @@ MATHEX_SCALAR MachGui::uiScaleFactor()
 
 void MachGui::setUiScaleFactor(MATHEX_SCALAR scale)
 {
+    scale = 2.0;
     s_uiScaleFactor = scale;
 }
 
