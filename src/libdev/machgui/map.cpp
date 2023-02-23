@@ -28,6 +28,7 @@
 #include "machlog/cntrl_pc.hpp"
 #include "machphys/plansurf.hpp"
 #include "machphys/machdata.hpp"
+#include "machgui/gui.hpp"
 #include "machgui/worldvie.hpp"
 #include "machgui/map.hpp"
 #include "machgui/ingame.hpp"
@@ -53,16 +54,20 @@ const size_t BEENHERE_ARRAYHEIGHT = 70;
 class MachGuiTerrainOnOffButton : public GuiBitmapButtonWithFilledBorder
 {
 public:
-	MachGuiTerrainOnOffButton( GuiDisplayable* pParent, const Gui::Coord& rel, MachContinentMap* pMap, MachInGameScreen* pInGameScreen )
-	:	GuiBitmapButtonWithFilledBorder( 	pParent,
-											rel,
-											GuiBorderMetrics( 1, 1, 1 ),
-											GuiFilledBorderColours( MachGui::VERYDARKGREY(), Gui::LIGHTGREY(), Gui::DARKGREY(), Gui::GREEN() ),
-											Gui::bitmap( SysPathName("gui/map/mapt.bmp") ),
-											Gui::Coord( 1, 1 ) ),
-		pMap_( NULL ),
-		pInGameScreen_( pInGameScreen )
-	{
+    MachGuiTerrainOnOffButton(GuiDisplayable* pParent,
+                              const Gui::Coord& rel,
+                              MachContinentMap* pMap,
+                              MachInGameScreen* pInGameScreen)
+        : GuiBitmapButtonWithFilledBorder(
+            pParent,
+            rel,
+            GuiBorderMetrics(1, 1, 1),
+            GuiFilledBorderColours(MachGui::VERYDARKGREY(), Gui::LIGHTGREY(), Gui::DARKGREY(), Gui::GREEN()),
+            Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/map/mapt.bmp"))),
+            Gui::Coord(1, 1))
+        , pMap_(NULL)
+        , pInGameScreen_(pInGameScreen)
+    {
 		popupButton( false );
 		setDepressed( true );
 		pMap_ = pMap; // Must come after line above
@@ -123,16 +128,20 @@ protected:
 class MachGuiMapModeButton : public GuiBitmapButtonWithFilledBorder
 {
 public:
-	MachGuiMapModeButton( GuiDisplayable* pParent, const Gui::Coord& rel, MachContinentMap* pMap, MachInGameScreen* pInGameScreen )
-	:	GuiBitmapButtonWithFilledBorder( 	pParent,
-											rel,
-											GuiBorderMetrics( 1, 1, 1 ),
-											GuiFilledBorderColours( MachGui::VERYDARKGREY(), Gui::LIGHTGREY(), Gui::DARKGREY(), Gui::GREEN() ),
-											Gui::bitmap( SysPathName("gui/map/mapm.bmp") ),
-											Gui::Coord( 1, 1 ) ),
-		pMap_( NULL ),
-		pInGameScreen_( pInGameScreen )
-	{
+    MachGuiMapModeButton(GuiDisplayable* pParent,
+                         const Gui::Coord& rel,
+                         MachContinentMap* pMap,
+                         MachInGameScreen* pInGameScreen)
+        : GuiBitmapButtonWithFilledBorder(
+            pParent,
+            rel,
+            GuiBorderMetrics(1, 1, 1),
+            GuiFilledBorderColours(MachGui::VERYDARKGREY(), Gui::LIGHTGREY(), Gui::DARKGREY(), Gui::GREEN()),
+            Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/map/mapm.bmp"))),
+            Gui::Coord(1, 1))
+        , pMap_(NULL)
+        , pInGameScreen_(pInGameScreen)
+    {
 		pMap_ = pMap;
 	}
 
@@ -285,7 +294,7 @@ void MachContinentMap::loadGame( const string& planet )
 {
 	string mapPath = "models/planet/";
 	mapPath += planet;
-    string mapBmp = mapPath + "/map.png";
+    string mapBmp = mapPath + "/map_2x.png";
 
     ASSERT_FILE_EXISTS( mapBmp.c_str() );
 
