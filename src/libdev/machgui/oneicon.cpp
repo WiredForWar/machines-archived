@@ -463,14 +463,20 @@ void MachGuiCorralSingleIconInfo::doDisplay()
 			insertStrings2.push_back( GuiString( buffer2 ) );
 			GuiResourceString hpStr(IDS_HITPOINTS, insertStrings2 );
 			concat += hpStr.asString();
-		}
+        }
 
-		// Render the text
-		Gui::Coord textPos( absoluteBoundary().minCorner() );
-		Gui::Coord shadowTextPos( absoluteBoundary().minCorner().x() + 1, absoluteBoundary().minCorner().y() + 1 );
-		GuiPainter::instance().text( shadowTextPos, concat.c_str(), Gui::BLACK() );
-		GuiPainter::instance().text( textPos, concat.c_str(), MachGui::OFFWHITE() );
-	}
+        // Render the text
+        Gui::Coord textPos(absoluteBoundary().minCorner());
+        Gui::Coord shadowTextPos(absoluteBoundary().minCorner() + Gui::Coord(1, 1));
+        int fontHeight = Gui::backBuffer().currentFontHeight();
+
+        RenSurface backBuffer = Gui::backBuffer();
+        backBuffer.useFontHeight(20);
+        backBuffer.drawText(shadowTextPos, concat, Gui::BLACK());
+        backBuffer.drawText(textPos, concat, MachGui::OFFWHITE());
+
+        Gui::backBuffer().useFontHeight(fontHeight);
+    }
 }
 
 void MachGuiCorralSingleIconInfo::setActor( MachActor* pActor )
