@@ -88,12 +88,12 @@ private:
 
     friend ostream& operator <<( ostream& o, const GuiBmpFont& t );
 
-	GuiBmpFontCore* pFontCore_;
-	FontType fontType_;
-	size_t spaceCharWidth_;
-	size_t spacing_;
-	bool underline_;
-	GuiColour underlineColour_;
+    GuiBmpFontCore* pFontCore_ = nullptr;
+    FontType fontType_ = PROPORTIONAL;
+    size_t spaceCharWidth_ = 0;
+    size_t spacing_ = 0;
+    bool underline_ = false;
+    GuiColour underlineColour_;
 };
 
 
