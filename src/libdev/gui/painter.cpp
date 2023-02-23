@@ -122,7 +122,7 @@ void GuiPainter::bevel( const Gui::Box& b,
 void GuiPainter::text( const Gui::Coord& c, const string& theText, const Gui::Colour& col ) const
 {
     RenSurface backBuffer = Gui::backBuffer();
-    backBuffer.useFontHeight(12);
+    backBuffer.useFontHeight(20);
     backBuffer.drawText( c.x(), c.y(), theText, col );
 }
 
@@ -131,7 +131,7 @@ void GuiPainter::rightAlignText( const Gui::Coord& c, const string& theText, con
     Gui::Coord cCopy( c );
 
     RenSurface backBuffer = Gui::backBuffer();
-    backBuffer.useFontHeight(12);
+    backBuffer.useFontHeight(20);
 
 	Ren::Rect textDimensions;
 	backBuffer.textDimensions( theText, &textDimensions );

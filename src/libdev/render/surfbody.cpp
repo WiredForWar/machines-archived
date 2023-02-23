@@ -514,8 +514,8 @@ const std::string& RenISurfBody::fontName()
 // static
 size_t RenISurfBody::defaultHeight()
 {
-	static bool first = true;
-	static size_t size = 12;
+    static bool first = true;
+    static size_t size = 20;
 
 	if (first)
 	{
