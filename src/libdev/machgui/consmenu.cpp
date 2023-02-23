@@ -9,8 +9,10 @@
 #include "machgui/consicns.hpp"
 #include "machgui/ingame.hpp"
 
-MachConstructMenu::MachConstructMenu( GuiDisplayable* pParent, const Gui::Coord& relCoord, MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen ) ) * MachGui::uiScaleFactor(), pInGameScreen )
+MachConstructMenu::MachConstructMenu(GuiDisplayable* pParent,
+                                     const Gui::Coord& relCoord,
+                                     MachInGameScreen* pInGameScreen)
+    : MachGuiScrollArea(pParent, Gui::Box(relCoord, reqWidth(), reqHeight(pInGameScreen)), pInGameScreen)
 {
 
     TEST_INVARIANT;
@@ -45,7 +47,7 @@ size_t MachConstructMenu::reqWidth()
 //static 
 size_t MachConstructMenu::reqHeight( MachInGameScreen* pInGameScreen )
 {
-	return MachConstructMenuIcons::reqHeight( pInGameScreen ) + 2;
+    return MachConstructMenuIcons::reqHeight(pInGameScreen) + 2 * MachGui::uiScaleFactor();
 }
 
 //virtual 

@@ -239,13 +239,13 @@ ostream& operator <<( ostream& o, const MachGuiCorralSingleIconInfo& t )
 //static
 size_t MachGuiCorralSingleIconInfo::reqWidth()
 {
-	return 93;
+    return 93 * MachGui::uiScaleFactor();
 }
 
 //static
 size_t MachGuiCorralSingleIconInfo::reqHeight()
 {
-	return 47;
+    return 47 * MachGui::uiScaleFactor();
 }
 
 // virtual
@@ -492,19 +492,19 @@ MachGuiCorralSingleIcon::MachGuiCorralSingleIcon( GuiDisplayable* pParent, const
 	pActor_( NULL ),
 	isObservingActor_( false )
 {
-	pIconInfo_ = _NEW( MachGuiCorralSingleIconInfo( this, Gui::Coord( MachGuiCorralResource::buttonWidth(), 0 ), pInGameScreen_ ) );
-	const char insideBuildingIconFile[] = "gui/misc/contents.bmp";
-	//const char insideBuildingIconFile[] = "gui/misc/contents_2x.png";
+    pIconInfo_ =
+        _NEW(MachGuiCorralSingleIconInfo(this, Gui::Coord(MachGuiCorralResource::buttonWidth(), 0), pInGameScreen_));
+    std::string insideBuildingIconFile = MachGui::getScaledImagePath("gui/misc/contents.bmp");
     pSelectInsideBuildingIcon_ = _NEW(MachGuiSelectInsideBuildingIcon(
         this,
         Gui::Coord(MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0),
         SysPathNames(SysPathName(insideBuildingIconFile), SysPathName(insideBuildingIconFile)),
         pInGameScreen_));
+    std::string headIconFile = MachGui::getScaledImagePath("gui/misc/red/inhead.bmp");
     pInHeadIcon_ = _NEW(
         MachGuiInHeadIcon(this,
                           Gui::Coord(MachGuiCorralResource::buttonWidth() + MachGuiCorralSingleIconInfo::reqWidth(), 0),
-                          SysPathNames(SysPathName(MachGui::getScaledImagePath("gui/misc/red/inhead.bmp")),
-                                       SysPathName(MachGui::getScaledImagePath("gui/misc/red/inhead.bmp"))),
+                          SysPathNames(SysPathName(headIconFile), SysPathName(headIconFile)),
                           pInGameScreen_));
 }
 

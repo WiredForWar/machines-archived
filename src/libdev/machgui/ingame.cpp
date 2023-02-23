@@ -1802,9 +1802,8 @@ void MachInGameScreen::currentContext( MachGui::ControlPanelContext newContext, 
 			case MachGui::CONSTRUCT_COMMAND:
             {
                 //Construct the construction selection menu
-                pConstructMenu_ = _NEW( MachConstructMenu( 	pControlPanel_,
-                											Gui::Coord( 1,0 ),
-                                                           	this ) );
+                pConstructMenu_ =
+                    _NEW(MachConstructMenu(pControlPanel_, Gui::Coord(1, 0) * MachGui::uiScaleFactor(), this));
                 pConstructMenu_->initialise();
 			    break;
             }
@@ -1834,13 +1833,11 @@ void MachInGameScreen::currentContext( MachGui::ControlPanelContext newContext, 
 
 				size_t yPos = sciCoord.y() + 2;
 
-                pHWResearchMenu_ = _NEW( MachHWResearchMenu(pControlPanel_,
-                											pHWResearchBank_,
-                                   							Gui::Coord( 1, yPos ),
-                                                        	this ) );
-				pHWResearchMenu_->initialise();
+                pHWResearchMenu_ = _NEW(MachHWResearchMenu(
+                    pControlPanel_, pHWResearchBank_, Gui::Coord(1, yPos) * MachGui::uiScaleFactor(), this));
+                pHWResearchMenu_->initialise();
 
-				GuiResourceString promptString( IDS_RESEARCHLEVEL_START );
+                GuiResourceString promptString( IDS_RESEARCHLEVEL_START );
 				commandPromptText( promptString.asString() );
 				clearCursorPromptText();
 
