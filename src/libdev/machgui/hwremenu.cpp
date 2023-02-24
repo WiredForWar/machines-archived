@@ -13,14 +13,14 @@
 #include "world4d/subject.hpp"
 #include "ctl/pvector.hpp"
 
-MachHWResearchMenu::MachHWResearchMenu( GuiDisplayable* pParent, 
-										MachHWResearchBank* pHWResearchBank,
-									    const Gui::Coord& relCoord,
-									    MachInGameScreen* pInGameScreen )
-:   MachGuiScrollArea( pParent, Gui::Box( relCoord, reqWidth(), reqHeight( pInGameScreen,relCoord ) ) * MachGui::uiScaleFactor(), pInGameScreen ),
-    pInGameScreen_( pInGameScreen ),
-    pHWResearchBank_( pHWResearchBank ),
-    pHardwareLab_( &selectedLab( pInGameScreen ) )
+MachHWResearchMenu::MachHWResearchMenu(GuiDisplayable* pParent,
+                                       MachHWResearchBank* pHWResearchBank,
+                                       const Gui::Coord& relCoord,
+                                       MachInGameScreen* pInGameScreen)
+    : MachGuiScrollArea(pParent, Gui::Box(relCoord, reqWidth(), reqHeight(pInGameScreen, relCoord)), pInGameScreen)
+    , pInGameScreen_(pInGameScreen)
+    , pHWResearchBank_(pHWResearchBank)
+    , pHardwareLab_(&selectedLab(pInGameScreen))
 {
     PRE( pHWResearchBank != NULL );
  
