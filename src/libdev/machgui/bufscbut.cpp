@@ -28,9 +28,14 @@ MachGuiBufferScrollButton::MachGuiBufferScrollButton( 	GuiDisplayable *pParent,
 
 /* /////////////////////////////////////////////// destructor /////////////////////////////////////////////////// */
 
-//virtual 
+//virtual
 MachGuiBufferScrollButton::~MachGuiBufferScrollButton()
 {}
+
+size_t MachGuiBufferScrollButton::width()
+{
+    return 17 * MachGui::uiScaleFactor();
+}
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -83,14 +88,16 @@ void MachGuiBufferScrollButton::listUpdated()
 //virtual 
 const GuiBitmap& MachGuiBufferScrollButton::getBitmap() const
 {
-	static GuiBitmap scrollLeftBmp( Gui::bitmap( SysPathName( "gui/misc/scrolll.bmp" ) ) );
-	static GuiBitmap scrollLeftHighlightBmp( Gui::bitmap( SysPathName( "gui/misc/scrolllh.bmp" ) ) );
-	static GuiBitmap scrollRightBmp( Gui::bitmap( SysPathName( "gui/misc/scrollr.bmp" ) ) );
-	static GuiBitmap scrollRightHighlightBmp( Gui::bitmap( SysPathName( "gui/misc/scrollrh.bmp" ) ) );
+    static GuiBitmap scrollLeftBmp(Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/scrolll.bmp"))));
+    static GuiBitmap scrollLeftHighlightBmp(
+        Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/scrolllh.bmp"))));
+    static GuiBitmap scrollRightBmp(Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/scrollr.bmp"))));
+    static GuiBitmap scrollRightHighlightBmp(
+        Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/scrollrh.bmp"))));
 
-  	if ( scrollDir_ == LEFT )
-	{
-		if ( list().canScrollBackward() )
+    if (scrollDir_ == LEFT)
+    {
+        if ( list().canScrollBackward() )
 		{
 			return scrollLeftHighlightBmp;
 		}
@@ -98,8 +105,8 @@ const GuiBitmap& MachGuiBufferScrollButton::getBitmap() const
 		{
 			return scrollLeftBmp; 
 		}
-	}	
-	else
+    }
+    else
 	{
 		if ( list().canScrollFoward() )
 		{
@@ -110,7 +117,7 @@ const GuiBitmap& MachGuiBufferScrollButton::getBitmap() const
 			return scrollRightBmp;
 		}
 	}
-}		
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

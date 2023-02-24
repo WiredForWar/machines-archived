@@ -61,21 +61,21 @@ MachGuiNewProductionIcon::~MachGuiNewProductionIcon()
 
 void MachGuiNewProductionIcon::doDisplayInteriorEnabled( const Gui::Coord& abs )
 {
-	static GuiBitmap numbers[10] = { Gui::bitmap( SysPathName( "gui/misc/numsqd0.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd1.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd2.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd3.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd4.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd5.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd6.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd7.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd8.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd9.bmp" ) ) };
+    static GuiBitmap numbers[10] = {Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd0.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd1.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd2.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd3.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd4.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd5.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd6.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd7.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd8.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd9.bmp")))};
 
-	Gui::Coord absCopy( abs );
-	absCopy.y( absCopy.y() + MachGuiBuildProgressBar::height() );
+    Gui::Coord absCopy(abs);
+    absCopy.y(absCopy.y() + MachGuiBuildProgressBar::height());
 
-	GuiPainter::instance().blit( bitmap_, absCopy );
+    GuiPainter::instance().blit( bitmap_, absCopy );
 
 	absCopy.x( absCopy.x() + bitmap_.width() );
 
