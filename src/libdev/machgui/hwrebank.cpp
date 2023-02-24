@@ -56,11 +56,16 @@ MachHWResearchBank::MachHWResearchBank
     //Create and display a build progress indicator if required
     updateProgress();
 
-	pScrollLeft_ = _NEW( MachGuiBufferScrollButton( this, Gui::Coord(0,0), SysPathName( "gui/misc/scrolll.bmp" ), pIcons_, MachGuiBufferScrollButton::LEFT, pInGameScreen ) );
+    pScrollLeft_ = _NEW(MachGuiBufferScrollButton(this,
+                                                  Gui::Coord(0, 0),
+                                                  SysPathName(MachGui::getScaledImagePath("gui/misc/scrolll.bmp")),
+                                                  pIcons_,
+                                                  MachGuiBufferScrollButton::LEFT,
+                                                  pInGameScreen));
     pScrollRight_ = _NEW(MachGuiBufferScrollButton(
         this,
         Gui::Coord(MachGuiBufferScrollButton::width() + MachHWResearchBankIcons::reqWidth(), 0),
-        SysPathName("gui/misc/scrollr.bmp"),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/scrollr.bmp")),
         pIcons_,
         MachGuiBufferScrollButton::RIGHT,
         pInGameScreen));

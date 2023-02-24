@@ -53,14 +53,14 @@ MachProductionBank::MachProductionBank
 
     pScrollLeft_ = _NEW(MachGuiBufferScrollButton(this,
                                                   Gui::Coord(0, 0),
-                                                  SysPathName("gui/misc/scrolll.bmp"),
+                                                  SysPathName(MachGui::getScaledImagePath("gui/misc/scrolll.bmp")),
                                                   pIcons_,
                                                   MachGuiBufferScrollButton::LEFT,
                                                   pInGameScreen));
     pScrollRight_ =
         _NEW(MachGuiBufferScrollButton(this,
                                        Gui::Coord(MachGuiBufferScrollButton::width() + pIcons_->maxContentWidth(), 0),
-                                       SysPathName("gui/misc/scrollr.bmp"),
+                                       SysPathName(MachGui::getScaledImagePath("gui/misc/scrollr.bmp")),
                                        pIcons_,
                                        MachGuiBufferScrollButton::RIGHT,
                                        pInGameScreen));
