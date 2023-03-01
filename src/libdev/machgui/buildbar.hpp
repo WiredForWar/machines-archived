@@ -47,10 +47,6 @@ private:
 
     friend ostream& operator <<( ostream& o, const MachGuiBuildProgressBar& t );
 
-	enum { BORDER_THICKNESS = 1 };
-	enum { BAR_THICKNESS = 2 };
-	enum { SHADOW_THICKNESS = 1 };
-
 	float percentageComplete_;
 };
 
