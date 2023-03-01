@@ -73,7 +73,7 @@ void MachGuiNewProductionIcon::doDisplayInteriorEnabled( const Gui::Coord& abs )
                                     Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd9.bmp")))};
 
     Gui::Coord absCopy(abs);
-    absCopy.y(absCopy.y() + MachGuiBuildProgressBar::height());
+    absCopy.y(absCopy.y() + MachGuiBuildProgressBar::height() + 1);
 
     GuiPainter::instance().blit( bitmap_, absCopy );
 
