@@ -33,19 +33,26 @@ public:
 		squadNum_( squadNum ),
         numInSquad_( 0 )
 	{
-		staticImageRandom_ = MexBasicRandom::constructSeededFromTime();
-	}
+        staticImageRandom_ = MexBasicRandom::constructSeededFromTime();
+    }
 
-	virtual ~MachGuiSquadronAdminIcon()
-	{}
+    virtual ~MachGuiSquadronAdminIcon()
+    {
+    }
 
-	static size_t reqWidth()	{ return 40; }
-	static size_t reqHeight()   { return 40; }
+    static size_t reqWidth()
+    {
+        return MachGuiSquadronBankIcon::reqWidth();
+    }
+    static size_t reqHeight()
+    {
+        return MachGuiSquadronBankIcon::reqHeight();
+    }
 
-	void update()
-	{
-	   	MachLogRaces& races = MachLogRaces::instance();
-   		MachPhys::Race race = races.pcController().race();
+    void update()
+    {
+        MachLogRaces& races = MachLogRaces::instance();
+        MachPhys::Race race = races.pcController().race();
         MachLogSquadron* pSquadron = races.squadrons( race )[ squadNum_ ];
         numInSquad_ = pSquadron->machines().size();
 		noCommander_ = true;
@@ -67,8 +74,8 @@ public:
         // The static might be "cool", but CONSISTENCY with FP command icons is more important. :)
         //redrawEveryFrame( noCommander_ and ( numInSquad_ > 0 ) );
 
-		changed();
-	}
+        changed();
+    }
 
     virtual void doDisplay()
     {
@@ -86,10 +93,10 @@ public:
         }
 
         Gui::Coord absCoordInOne(absoluteCoord());
-        absCoordInOne.x( absCoordInOne.x() + 1 );
-		absCoordInOne.y( absCoordInOne.y() + 1 );
+        absCoordInOne.x(absCoordInOne.x() + 1 * MachGui::uiScaleFactor());
+        absCoordInOne.y(absCoordInOne.y() + 1 * MachGui::uiScaleFactor());
 
-   		if ( numInSquad_ > 0 )
+        if ( numInSquad_ > 0 )
 		{
 			GuiPainter::instance().hollowRectangle( absoluteBoundary(), Gui::BLACK(), 1 );
 
@@ -165,15 +172,19 @@ private:
 	MachGuiSquadronBankIcon* pIcon_;
 };
 
-MachGuiSquadronBank::MachGuiSquadronBank( GuiDisplayable* pParent, 
-										  const Gui::Coord& rel,
-										  MachSquadronIcon* pNavButton,
-										  MachInGameScreen* pInGameScreen )
-: GuiSimpleScrollableList( 	pParent, 
-							Gui::Box( rel.x(), rel.y(), rel.x() + MachGuiSquadronBank::reqWidth(), rel.y() + MachGuiSquadronBank::reqHeight() ), 
- 							MachGuiSquadron::reqWidth() + 22, MachGuiSquadronBankIcon::reqHeight() - 1, 1 ),
-  pInGameScreen_( pInGameScreen ),
-  pNavButton_( pNavButton )
+MachGuiSquadronBank::MachGuiSquadronBank(GuiDisplayable* pParent,
+                                         const Gui::Coord& rel,
+                                         MachSquadronIcon* pNavButton,
+                                         MachInGameScreen* pInGameScreen)
+    : GuiSimpleScrollableList(
+        pParent,
+        Gui::Box(
+            rel.x(), rel.y(), rel.x() + MachGuiSquadronBank::reqWidth(), rel.y() + MachGuiSquadronBank::reqHeight()),
+        MachGuiSquadron::reqWidth() + 22 * MachGui::uiScaleFactor(),
+        MachGuiSquadronBankIcon::reqHeight() - 1 * MachGui::uiScaleFactor(),
+        1)
+    , pInGameScreen_(pInGameScreen)
+    , pNavButton_(pNavButton)
 {
 	for( size_t i = 1; i < N_SQUADRON_ICONS; ++i )
 	{
@@ -407,14 +418,14 @@ void MachGuiSquadronBank::unloadGame()
 //static 
 size_t MachGuiSquadronBank::reqWidth()
 {
-	const size_t spacer = 22;
-	return ( 2 * MachGuiSquadron::reqWidth() + spacer );
+    const size_t spacer = 22 * MachGui::uiScaleFactor();
+    return (2 * MachGuiSquadron::reqWidth() + spacer);
 }
 
 //static 
 size_t MachGuiSquadronBank::reqHeight()
 {
-	return ( 5 * MachGuiSquadronBankIcon::reqHeight() - 4 /* buttons overlap by one pixel */ );
+    return (5 * MachGuiSquadronBankIcon::reqHeight() - 4 * MachGui::uiScaleFactor() /* buttons overlap by one pixel */);
 }
 
 void MachGuiSquadronBank::update()
@@ -588,46 +599,44 @@ void MachGuiSquadronBankIcon::doBeReleased( const GuiMouseEvent& )
 const SysPathName& 
 MachGuiSquadronBankIcon::iconBitmaps( unsigned squadronIndex )
 {
-	PRE( squadronIndex < MachGuiSquadronBank::N_SQUADRON_ICONS );
+    PRE(squadronIndex < MachGuiSquadronBank::N_SQUADRON_ICONS);
 
-//	SysPathNames p = make_pair( SysPathName( "gui/squadbnk/num0.bmp" ), SysPathName( "gui/squadbnk/num0.bmp" ) );
+    //	SysPathNames p = make_pair( SysPathName( "gui/squadbnk/num0.bmp" ), SysPathName( "gui/squadbnk/num0.bmp" ) );
 
-	static SysPathName bitmaps_[ MachGuiSquadronBank::N_SQUADRON_ICONS ] =
-	{
-		SysPathName( "gui/misc/squad0.bmp" ),
-		SysPathName( "gui/misc/squad1.bmp" ),
-		SysPathName( "gui/misc/squad2.bmp" ),
-		SysPathName( "gui/misc/squad3.bmp" ),
-		SysPathName( "gui/misc/squad4.bmp" ),
-		SysPathName( "gui/misc/squad5.bmp" ),
-		SysPathName( "gui/misc/squad6.bmp" ),
-		SysPathName( "gui/misc/squad7.bmp" ),
-		SysPathName( "gui/misc/squad8.bmp" ),
-		SysPathName( "gui/misc/squad9.bmp" )
-	};
+    static SysPathName bitmaps_[MachGuiSquadronBank::N_SQUADRON_ICONS] = {
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad0.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad1.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad2.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad3.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad4.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad5.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad6.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad7.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad8.bmp")),
+        SysPathName(MachGui::getScaledImagePath("gui/misc/squad9.bmp"))};
 
-	POST( bitmaps_[ squadronIndex ].existsAsFile() );
-	return bitmaps_[ squadronIndex ];
+    POST(bitmaps_[squadronIndex].existsAsFile());
+    return bitmaps_[squadronIndex];
 }
 
 //virtual 
 void MachGuiSquadronBankIcon::doDisplayInteriorEnabled( const Gui::Coord& abs )
 {
-	static GuiBitmap numbers[10] = { Gui::bitmap( SysPathName( "gui/misc/numsqd0.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd1.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd2.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd3.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd4.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd5.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd6.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd7.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd8.bmp" ) ),
-									 Gui::bitmap( SysPathName( "gui/misc/numsqd9.bmp" ) ) };
+    static GuiBitmap numbers[10] = {Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd0.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd1.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd2.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd3.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd4.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd5.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd6.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd7.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd8.bmp"))),
+                                    Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/numsqd9.bmp")))};
 
-	GuiIcon::doDisplayInteriorEnabled( abs );
+    GuiIcon::doDisplayInteriorEnabled(abs);
 
-	if ( numInSquad_ > 0 )
-	{
+    if (numInSquad_ > 0)
+    {
 		Gui::Coord absCopy( abs );
 		absCopy.y( absCopy.y() + reqHeight() - 4 /* border height*/ - 9 /* number height*/); //TODO: remove hard coding
 		absCopy.x( absCopy.x() + reqWidth() - 4 /*border width*/ );
