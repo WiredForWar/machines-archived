@@ -1058,8 +1058,8 @@ bool MachInGameScreen::addPromptTextConstructionInfo( MachActor* pActor, GuiStri
 		{
 			// Add Research Rate info
 //			GuiResourceString rpText( IDS_RESEARCHPOINTS, GuiString( itoa( pActor->asHardwareLab().totalResearchRate(), buffer, 10 ) ) );
-            sprintf(buffer, "%d", pActor->asHardwareLab().totalResearchRate());
-			GuiResourceString rpText( IDS_RESEARCHPOINTS, GuiString( buffer ) );
+            sprintf(buffer, "%d", (uint)pActor->asHardwareLab().totalResearchRate());
+            GuiResourceString rpText( IDS_RESEARCHPOINTS, GuiString( buffer ) );
 			prompt += " " + rpText.asString();
 		}
 
