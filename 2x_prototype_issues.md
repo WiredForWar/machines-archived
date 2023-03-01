@@ -1,0 +1,5 @@
+- Only desert map (because models/planet/%name%/map_2x.png file is needed)
+- Only skirmish (due to the previous point)
+- Only red race (other icon files are not scaled yet)
+- Save files are not compatible with the normal build (the fog of war serialization works per mini-map pixel => 2X minimap leads to different size of the fog of war)
+- Options and HotKeys menu do not work (the menu is not scaled and the game crashes on rendering 2X text in the options comboboxes)
