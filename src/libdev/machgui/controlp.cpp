@@ -29,12 +29,13 @@ class MachGuiControlPanelOnOffBtn : public GuiButton
 // cannonical from revoked
 {
 public:
-	MachGuiControlPanelOnOffBtn( GuiDisplayable *pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen )
-	:	GuiButton(pParent, Gui::Box( rel, reqWidth(), reqHeight() ) ),
-		pInGameScreen_( pInGameScreen ),
-		slideHoleBmp_( Gui::bitmap( "gui/misc/slidhole.bmp" ) ),
-		sliderBmp_( Gui::bitmap( "gui/misc/slider.bmp" ) )
-	{}
+    MachGuiControlPanelOnOffBtn(GuiDisplayable* pParent, const Gui::Coord& rel, MachInGameScreen* pInGameScreen)
+        : GuiButton(pParent, Gui::Box(rel, reqWidth(), reqHeight()))
+        , pInGameScreen_(pInGameScreen)
+        , slideHoleBmp_(Gui::bitmap(MachGui::getScaledImagePath("gui/misc/slidhole.bmp")))
+        , sliderBmp_(Gui::bitmap(MachGui::getScaledImagePath("gui/misc/slider.bmp")))
+    {
+    }
 
 	static int reqWidth()
 	{
