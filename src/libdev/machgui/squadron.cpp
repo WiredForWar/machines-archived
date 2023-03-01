@@ -70,26 +70,23 @@ public:
 		changed();
 	}
 
-	virtual void doDisplay()
-	{
-        /* The static might be "cool", but CONSISTENCY with FP command icons is more important. :)
-         *
-		// TV static bitmaps
-		static GuiBitmap nosquadBmp[5];
+    virtual void doDisplay()
+    {
+        // TV static bitmaps
+        static GuiBitmap nosquadBmp[5];
 		static bool initialised = false;
 		if ( not initialised )
 		{
-			nosquadBmp[0] = Gui::bitmap( SysPathName( "gui/misc/nosquad1.bmp" ) );
-			nosquadBmp[1] = Gui::bitmap( SysPathName( "gui/misc/nosquad2.bmp" ) );
-			nosquadBmp[2] = Gui::bitmap( SysPathName( "gui/misc/nosquad3.bmp" ) );
-			nosquadBmp[3] = Gui::bitmap( SysPathName( "gui/misc/nosquad4.bmp" ) );
-			nosquadBmp[4] = Gui::bitmap( SysPathName( "gui/misc/nosquad5.bmp" ) );
-			initialised = true;
-		}
-        */
-		
-		Gui::Coord absCoordInOne( absoluteCoord() );
-		absCoordInOne.x( absCoordInOne.x() + 1 );
+            nosquadBmp[0] = Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/nosquad1.bmp")));
+            nosquadBmp[1] = Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/nosquad2.bmp")));
+            nosquadBmp[2] = Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/nosquad3.bmp")));
+            nosquadBmp[3] = Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/nosquad4.bmp")));
+            nosquadBmp[4] = Gui::bitmap(SysPathName(MachGui::getScaledImagePath("gui/misc/nosquad5.bmp")));
+            initialised = true;
+        }
+
+        Gui::Coord absCoordInOne(absoluteCoord());
+        absCoordInOne.x( absCoordInOne.x() + 1 );
 		absCoordInOne.y( absCoordInOne.y() + 1 );
 
    		if ( numInSquad_ > 0 )
@@ -100,18 +97,18 @@ public:
 			if ( noCommander_ )
 			{
                 GuiPainter::instance().blit(bitmap_, absCoordInOne );
-                //GuiPainter::instance().blit(nosquadBmp[ mexRandomInt( &staticImageRandom_, 5 ) ], absCoordInOne );
-		   	} 
-			else // Squad with commander, show commander
-			{
+                GuiPainter::instance().blit(nosquadBmp[mexRandomInt(&staticImageRandom_, 5)], absCoordInOne);
+            }
+            else // Squad with commander, show commander
+            {
 				GuiPainter::instance().blit(bitmap_, absCoordInOne );
 		 	}
 		}
 		else // Empty squad
 		{
 			GuiPainter::instance().filledRectangle( absoluteBoundary(), Gui::BLACK() );
-		}	 
-	}
+        }
+    }
 
 private:
 	GuiBitmap bitmap_;
