@@ -10,16 +10,37 @@
 
 //////////////////////////////////////////////////////////////////////
 
-MachGuiHealthBar::MachGuiHealthBar( GuiDisplayable * pParent,
-    								const Gui::Coord& rel, 
-    								unsigned width,
-									MachPhys::HitPointUnits maxHits,
-    								MachPhys::ArmourUnits maxArmour )
-: GuiDisplayable( pParent, Gui::Box( rel, width, SHADOW_THICKNESS + HP_THICKNESS + AP_THICKNESS + DIVIDER_THICKNESS + ( 2 * BORDER_THICKNESS ) ) ),
-  maxHits_( maxHits ),
-  maxArmour_( maxArmour ),
-  currentHits_( 0 ),
-  currentArmour_( 0 )
+enum
+{
+    BORDER_THICKNESS = 1
+};
+enum
+{
+    HP_THICKNESS = 2
+};
+enum
+{
+    DIVIDER_THICKNESS = 1
+};
+enum
+{
+    AP_THICKNESS = 2
+};
+enum
+{
+    SHADOW_THICKNESS = 1
+};
+
+MachGuiHealthBar::MachGuiHealthBar(GuiDisplayable* pParent,
+                                   const Gui::Coord& rel,
+                                   unsigned width,
+                                   MachPhys::HitPointUnits maxHits,
+                                   MachPhys::ArmourUnits maxArmour)
+    : GuiDisplayable(pParent, Gui::Box(rel, width, healthBarHeight()))
+    , maxHits_(maxHits)
+    , maxArmour_(maxArmour)
+    , currentHits_(0)
+    , currentArmour_(0)
 {
 	PRE( maxHits > 0 );
 	PRE( maxArmour > 0 );
@@ -118,31 +139,44 @@ MachGuiHealthBar::armourColour( unsigned currentValue, unsigned maxValue )
 
 void MachGuiHealthBar::doDisplay()
 {
-	GuiPainter::instance().hollowRectangle( absoluteBoundary(), Gui::WHITE(), BORDER_THICKNESS );
+    const int BorderThickness = BORDER_THICKNESS * MachGui::uiScaleFactor();
+    const int ShadowThickness = SHADOW_THICKNESS * MachGui::uiScaleFactor();
+    const int DividerThickness = DIVIDER_THICKNESS * MachGui::uiScaleFactor();
+    const int BarThickness = MachGui::uiScaleFactor() == 1 ? 2 : 3; // HP_THICKNESS, AP_THICKNESS
 
-	unsigned interiorWidth = width() - ( 2 * BORDER_THICKNESS ) - SHADOW_THICKNESS;
-	unsigned armourWidth = ( (double)currentArmour_ / (double)maxArmour_ ) * ((double)interiorWidth - 1.0);
-	unsigned hitsWidth = ( (double)currentHits_ / (double)maxHits_ ) * ((double)interiorWidth - 1.0);
+    unsigned interiorWidth = width() - (2 * BorderThickness) - ShadowThickness;
+    unsigned armourWidth = ((double)currentArmour_ / (double)maxArmour_) * interiorWidth;
+    unsigned hitsWidth = ((double)currentHits_ / (double)maxHits_) * interiorWidth;
 
-	Gui::Coord topLeft( absoluteCoord().x() + BORDER_THICKNESS, absoluteCoord().y() + BORDER_THICKNESS );
-	Gui::Coord sc( absoluteCoord().x() + BORDER_THICKNESS + SHADOW_THICKNESS, absoluteCoord().y() + BORDER_THICKNESS  );
-	Gui::Coord ac( absoluteCoord().x() + BORDER_THICKNESS + SHADOW_THICKNESS, absoluteCoord().y() + 1 + BORDER_THICKNESS + SHADOW_THICKNESS);
-	Gui::Coord dc( absoluteCoord().x() + BORDER_THICKNESS + SHADOW_THICKNESS, absoluteCoord().y() + BORDER_THICKNESS + SHADOW_THICKNESS + AP_THICKNESS );
-	Gui::Coord hc( absoluteCoord().x() + BORDER_THICKNESS + SHADOW_THICKNESS, absoluteCoord().y() + 1 + BORDER_THICKNESS + SHADOW_THICKNESS + AP_THICKNESS + DIVIDER_THICKNESS );
- 	
- 	GuiPainter::instance().horizontalLine( sc, interiorWidth, Gui::BLACK(), SHADOW_THICKNESS );
-	GuiPainter::instance().horizontalLine( ac, interiorWidth - 1, Gui::LIGHTGREY(), AP_THICKNESS );
-	GuiPainter::instance().horizontalLine( ac, armourWidth, armourColour( currentArmour_, maxArmour_ ), AP_THICKNESS );
-	GuiPainter::instance().horizontalLine( dc, interiorWidth, Gui::LIGHTGREY(), DIVIDER_THICKNESS );
-	GuiPainter::instance().horizontalLine( hc, interiorWidth - 1, Gui::LIGHTGREY(), HP_THICKNESS );
-	GuiPainter::instance().horizontalLine( hc, hitsWidth, hpColour( currentHits_, maxHits_ ), HP_THICKNESS );
-	GuiPainter::instance().verticalLine( topLeft, SHADOW_THICKNESS+AP_THICKNESS+DIVIDER_THICKNESS+HP_THICKNESS, Gui::BLACK(), SHADOW_THICKNESS );
+    Gui::Coord topLeft(absoluteCoord().x() + BorderThickness, absoluteCoord().y() + BorderThickness);
+    Gui::Coord sc(absoluteCoord().x() + BorderThickness + ShadowThickness, absoluteCoord().y() + BorderThickness);
+    Gui::Coord ac(absoluteCoord().x() + BorderThickness + ShadowThickness,
+                  absoluteCoord().y() + 1 * MachGui::uiScaleFactor() + BorderThickness + ShadowThickness);
+    Gui::Coord dc(absoluteCoord().x() + BorderThickness + ShadowThickness,
+                  absoluteCoord().y() + BorderThickness + ShadowThickness + BarThickness);
+    Gui::Coord hc(absoluteCoord().x() + BorderThickness + ShadowThickness,
+                  absoluteCoord().y() + 1 * MachGui::uiScaleFactor() + BorderThickness + ShadowThickness + BarThickness
+                      + DividerThickness);
+
+    GuiPainter::instance().horizontalLine(sc, interiorWidth, Gui::BLACK(), ShadowThickness);
+    GuiPainter::instance().horizontalLine(ac, interiorWidth - 1, Gui::LIGHTGREY(), BarThickness);
+    GuiPainter::instance().horizontalLine(ac, armourWidth, armourColour(currentArmour_, maxArmour_), BarThickness);
+    GuiPainter::instance().horizontalLine(dc, interiorWidth, Gui::LIGHTGREY(), DividerThickness);
+    GuiPainter::instance().horizontalLine(hc, interiorWidth - 1, Gui::LIGHTGREY(), BarThickness);
+    GuiPainter::instance().horizontalLine(hc, hitsWidth, hpColour(currentHits_, maxHits_), BarThickness);
+    GuiPainter::instance().verticalLine(
+        topLeft, ShadowThickness + BarThickness + DividerThickness + BarThickness, Gui::BLACK(), ShadowThickness);
+
+    GuiPainter::instance().hollowRectangle(absoluteBoundary(), Gui::WHITE(), BorderThickness);
 }
 
 //static 
 size_t MachGuiHealthBar::healthBarHeight()
 {
-	return ( BORDER_THICKNESS + SHADOW_THICKNESS + HP_THICKNESS + DIVIDER_THICKNESS + AP_THICKNESS + BORDER_THICKNESS ) * MachGui::uiScaleFactor();
+    const int BarThickness = MachGui::uiScaleFactor() == 1 ? 2 : 3; // HP_THICKNESS, AP_THICKNESS
+
+    return (BORDER_THICKNESS + SHADOW_THICKNESS + DIVIDER_THICKNESS + BORDER_THICKNESS) * MachGui::uiScaleFactor()
+           + BarThickness * 2;
 }
 
 void MachGuiHealthBar::depress( bool doDepress )
