@@ -512,6 +512,7 @@ void MachGuiCtxSkirmish::updateSelectedScenario(MachGuiDbScenario& scenario)
 {
     pStartupScreens_->startupData()->scenario(&scenario);
     pScenarioDesc_->setText(scenario.textData().campaignText());
+    updateAvailablePositions(scenario);
     updateMaxPlayersList(scenario);
 }
 
@@ -669,7 +670,21 @@ MachGuiText* MachGuiCtxSkirmish::addSetting(
     return pText;
 }
 
-void MachGuiCtxSkirmish::updateMaxPlayersList(MachGuiDbScenario& scenario)
+void MachGuiCtxSkirmish::updateAvailablePositions(const MachGuiDbScenario& scenario)
+{
+    if (scenario.fixedPositionsRequired())
+    {
+        const GuiResourceString resStr(IDS_MENU_STARTFIXED);
+        pStartingPosSelector_->text(resStr.asString());
+        pStartingPosSelector_->setEnabled(false);
+    }
+    else
+    {
+        pStartingPosSelector_->setEnabled(true);
+    }
+}
+
+void MachGuiCtxSkirmish::updateMaxPlayersList(const MachGuiDbScenario& scenario)
 {
     // Update "num players" setting so that, for example, you can't select a four player game when
     // the scenario doesn't support four players

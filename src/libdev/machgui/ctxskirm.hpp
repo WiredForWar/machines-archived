@@ -50,7 +50,8 @@ public:
 protected:
     MachGuiText* addSetting(bool numPlayers, MachGuiDropDownListBoxCreator*&, uint labelStrId, int numStrs, ...);
 
-    void updateMaxPlayersList(MachGuiDbScenario&);
+    void updateAvailablePositions(const MachGuiDbScenario& scenario);
+    void updateMaxPlayersList(const MachGuiDbScenario& scenario);
 
 private:
     friend std::ostream& operator<<(std::ostream& o, const MachGuiCtxSkirmish& t);
