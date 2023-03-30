@@ -10,62 +10,60 @@
     which the class is parameterized.
 */
 
-#ifndef _FTL_SERIAMAP_HPP
-#define _FTL_SERIAMAP_HPP
+#ifndef FTL_SERIAMAP_HPP
+#define FTL_SERIAMAP_HPP
 
-#include "base/base.hpp"
-
-#include "ftl/map.hpp"
 #include "ftl/serialid.hpp"
-#include "ctl/vector.hpp"
+
+#include <unordered_map>
 
 // Orthodox canonical
-template <class VALUE> class FtlSerialMap : public FtlMap<FtlSerialId, VALUE>
+template <class VALUE> class FtlSerialMap : public std::unordered_map<FtlSerialId, VALUE>
 {
 public:
-    // ctor.
-    FtlSerialMap();
+    FtlSerialMap() = default;
 
-    // dtor.
-    ~FtlSerialMap() override {};
+    using Key = FtlSerialId;
+    using Value = VALUE;
+    using KeyValueAssoc = std::pair<FtlSerialId, Value>;
 
-    // inherited from FtlContainer...
-    bool contains(const FtlSerialId& id) const override;
+    using std::unordered_map<FtlSerialId, Value>::operator[];
 
-    // inherited from FtlAssociativeCollection...
-    void add(const FtlPair<FtlSerialId, VALUE>& addMe) override;
-    // PRE( not contains( addMe.first )
+    const Value& operator[](const Key& key) const;
 
-    void remove(const FtlSerialId& id) override;
-    // PRE( contains( id ) )
+    bool contains(const FtlSerialId& id) const;
 
-    void CLASS_INVARIANT;
+    void add(const std::pair<FtlSerialId, Value>& addMe);
 
-protected:
-    const VALUE& doSubscript(const FtlSerialId& id) const override;
-    // PRE( contains( id ) );
-
-private:
-    // Operations deliberately revoked
-    FtlSerialMap(const FtlSerialMap<VALUE>&);
-    FtlSerialMap<VALUE>& operator=(const FtlSerialMap<VALUE>&);
-    bool operator==(const FtlSerialMap<VALUE>&);
-
-    using Entry = std::pair<size_t, VALUE>;
-
-    // Data members
-    ctl_vector<size_t> index_; // index_[id] is the element of values_ storing the mapped value
-    ctl_vector<Entry> values_; // first of pair is location in index_ of ref
+    void remove(const FtlSerialId& id);
 };
 
-// #ifdef _INSTANTIATE_TEMPLATE_CLASSES
-#include "ftl/seriamap.ctp"
-// #endif
+template <class VALUE> inline const VALUE& FtlSerialMap<VALUE>::operator[](const Key& key) const
+{
+    auto it = std::unordered_map<FtlSerialId, VALUE>::find(key);
+    if (it != std::unordered_map<FtlSerialId, VALUE>::end())
+    {
+        return it->second;
+    }
 
-#ifdef _INLINE
-#include "ftl/seriamap.itp"
-#endif
+    return VALUE();
+}
 
-#endif
+template <class VALUE> inline bool FtlSerialMap<VALUE>::contains(const FtlSerialId& id) const
+{
+    return std::unordered_map<FtlSerialId, VALUE>::find(id) != std::unordered_map<FtlSerialId, VALUE>::end();
+}
+
+template <class VALUE> inline void FtlSerialMap<VALUE>::add(const std::pair<FtlSerialId, VALUE>& addMe)
+{
+    std::unordered_map<FtlSerialId, VALUE>::emplace(addMe.first, addMe.second);
+}
+
+template <class VALUE> inline void FtlSerialMap<VALUE>::remove(const FtlSerialId& id)
+{
+    std::unordered_map<FtlSerialId, VALUE>::erase(id);
+}
+
+#endif // FTL_SERIAMAP_HPP
 
 /* End SERIAMAP.HPP *************************************************/
