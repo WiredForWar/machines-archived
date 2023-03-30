@@ -71,6 +71,16 @@ private:
     RepType id_; // The id
 };
 
+namespace std
+{
+
+template <> struct hash<FtlSerialId>
+{
+    std::size_t operator()(const FtlSerialId& k) const { return k.asScalar(); }
+};
+
+} // std namespace
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 // Related class used to generate sequence of ids
