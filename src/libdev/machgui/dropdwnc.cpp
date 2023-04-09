@@ -281,7 +281,7 @@ void MachGuiDropDownListBoxCreator::doDisplay()
                 });
 
             // Draw list box item text
-            if (whiteFont_)
+            if (whiteFont_ && isEnabled())
             {
                 getWhiteFont().drawText(text_, textPos, width() - offset2);
             }
