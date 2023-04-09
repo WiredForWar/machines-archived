@@ -29,6 +29,7 @@
 #include "gui/font.hpp"
 #include "gui/painter.hpp"
 #include "machgui/internal/strings.hpp"
+#include "spdlog/spdlog.h"
 #include "system/registry.hpp"
 #include <stdarg.h>
 #include "machgui/menus_helper.hpp"
@@ -672,6 +673,11 @@ MachGuiText* MachGuiCtxSkirmish::addSetting(
 
 void MachGuiCtxSkirmish::updateAvailablePositions(const MachGuiDbScenario& scenario)
 {
+    spdlog::info(
+        "updateAvailablePositions: scenario {} ptr: {}, fpr: {}",
+        scenario.planetFile(),
+        (void*)(&scenario),
+        scenario.fixedPositionsRequired());
     if (scenario.fixedPositionsRequired())
     {
         const GuiResourceString resStr(IDS_MENU_STARTFIXED);

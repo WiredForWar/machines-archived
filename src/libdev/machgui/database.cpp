@@ -7,6 +7,7 @@
 
 #include "base/persist.hpp"
 #include "base/error.hpp"
+#include "spdlog/spdlog.h"
 #include "stdlib/string.hpp"
 #include <algorithm>
 #include "utility/linetok.hpp"
@@ -134,7 +135,7 @@ void MachGuiDatabase::readDatabase()
     registerDerivedClasses();
 
     // If there is a player updated version, load it
-    if (playerDatabasePath().existsAsFile())
+    if (false) // playerDatabasePath().existsAsFile())
     {
         // Load the version with current player info
         std::ifstream ifstr(playerDatabasePath().c_str(), std::ios::binary);
@@ -145,7 +146,7 @@ void MachGuiDatabase::readDatabase()
     else
     {
         // Check for a virgin persistent database
-        if (virginDatabasePersistentPath().existsAsFile())
+        if (false) // virginDatabasePersistentPath().existsAsFile())
         {
             // Load the version with current player info
             std::ifstream ifstr(virginDatabasePersistentPath().c_str(), std::ios::binary);
@@ -517,6 +518,11 @@ void MachGuiDatabase::parseScenario(UtlLineTokeniser& parser, MachGuiDbPlanet* p
     pScenario->musicTrack(musicTrack);
     pScenario->menuString(planetName);
     pScenario->setFixedPositionRequired(fixedPosition);
+
+    if (fixedPosition)
+    {
+        spdlog::info("Fixed pos scenario {} ptr: {}", planetFile, (void*)(pScenario));
+    }
 
     pPlanet->addScenario(pScenario);
 
