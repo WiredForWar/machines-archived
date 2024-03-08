@@ -1,5 +1,11 @@
 # Machines: Wired For War
 
+**This repository is archived**
+
+The work on the game is continued at https://github.com/WiredForWar/machines.
+
+We had to create a new repository with rewritten history to overcome git LFS quota issues (see [#8 at machines](https://github.com/markol/machines/issues/8) and [#19 at machines-archived](https://github.com/WiredForWar/machines-archived/issues/19)).
+
 **3D Real Time Strategy video game GL port source code**
 Released as a [free software](https://en.wikipedia.org/wiki/Free_software) under a permission of [Night Dive Studios](https://www.nightdivestudios.com/) who owns the rights to the game.
 
